@@ -113,7 +113,7 @@ const Brands = () => {
   }, []);
 
   return (
-    <div className="bg-gray-50 min-h-screen pt-16">
+    <div className="bg-gray-50 min-h-screen">
       {/* Hero section */}
       <section className="bg-primary text-white py-20">
         <div className="container mx-auto px-4">

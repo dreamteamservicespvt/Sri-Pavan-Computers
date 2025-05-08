@@ -122,7 +122,7 @@ const Navbar = () => {
             <img 
               src="/logo.png" 
               alt="Sri Pavan Computers" 
-              className="h-10"
+              className="h-12"
             />
           </Link>
           
