@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Phone, User, LogIn, LogOut } from 'lucide-react';
@@ -7,6 +6,40 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/hooks/use-auth';
 import ShoppingCart from './ShoppingCart';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
+// Separate component for navigation links with improved styling
+const NavLinks = ({ 
+  isActive, 
+  isMobile, 
+  closeMenu,
+  scrollToSection
+}: { 
+  isActive: (path: string) => boolean; 
+  isMobile: boolean;
+  closeMenu: () => void;
+  scrollToSection: (sectionId: string) => void;
+}) => {
+  // Enhanced link styles for better mobile and desktop experience
+  const linkClass = isMobile 
+    ? "text-base font-medium text-center block py-3 px-2 transition-colors hover:bg-gray-50 hover:text-primary border-b border-gray-100" 
+    : "px-3 py-1.5 rounded-md transition-colors text-white hover:text-white hover:bg-white/10";
+  
+  const activeLinkClass = isMobile
+    ? "text-base font-bold text-center block py-3 px-2 bg-gray-50 text-primary border-b border-gray-100"
+    : "px-3 py-1.5 rounded-md font-medium text-white bg-white/20";
+  
+  return (
+    <>
+      <Link to="/" className={isActive('/') ? activeLinkClass : linkClass} onClick={closeMenu}>Home</Link>
+      <Link to="/about" className={isActive('/about') ? activeLinkClass : linkClass} onClick={closeMenu}>About</Link>
+      <Link to="/products" className={isActive('/products') ? activeLinkClass : linkClass} onClick={closeMenu}>Products</Link>
+      <Link to="/services" className={isActive('/services') ? activeLinkClass : linkClass} onClick={closeMenu}>Services</Link>
+      <Link to="/brands" className={isActive('/brands') ? activeLinkClass : linkClass} onClick={closeMenu}>Brands</Link>
+      <Link to="/gallery" className={isActive('/gallery') ? activeLinkClass : linkClass} onClick={closeMenu}>Gallery</Link>
+      <Link to="/contact" className={isActive('/contact') ? activeLinkClass : linkClass} onClick={closeMenu}>Contact</Link>
+    </>
+  );
+};
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -64,7 +97,7 @@ const Navbar = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   // Set navbar background - always have a background
-  const navbarBgClass = "bg-white shadow-md";
+  const navbarBgClass = "bg-[#02315b] shadow-md";
 
   // Function to handle smooth scroll to section
   const scrollToSection = (sectionId: string) => {
@@ -81,11 +114,16 @@ const Navbar = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBgClass} py-1 md:py-2`}>
+    <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navbarBgClass} py-1 md:py-2 ${isMenuOpen ? 'h-screen md:h-auto' : ''}`}>
       <div className="container mx-auto px-3 md:px-4">
-        <div className="flex items-center justify-between h-14">
-          <Link to="/" className="font-bold text-lg md:text-xl text-primary transition-colors duration-300">
-            Sri Pavan Computers
+        <div className={`flex items-center justify-between h-14 ${isMenuOpen ? 'border-b border-gray-200' : ''}`}>
+          {/* Replace text logo with image logo */}
+          <Link to="/" className="flex items-center">
+            <img 
+              src="/logo.png" 
+              alt="Sri Pavan Computers" 
+              className="h-10"
+            />
           </Link>
           
           {/* Desktop navigation */}
@@ -99,15 +137,15 @@ const Navbar = () => {
           </div>
           
           <div className="hidden md:flex items-center space-x-3">
-            <a href="tel:+919848075759" className="flex items-center space-x-1 text-sm text-gray-700 hover:text-primary transition-colors">
+            <a href="tel:+919848075759" className="flex items-center space-x-1 text-sm text-white hover:text-primary-foreground transition-colors">
               <Phone size={16} />
               <span>+91 98480 75759</span>
             </a>
             
-            {/* Authentication Links for Desktop */}
+            {/* Authentication Links for Desktop - updated to white */}
             {user ? (
               <div className="flex items-center space-x-2">
-                <Button asChild variant="ghost" size="sm">
+                <Button asChild variant="ghost" size="sm" className="text-white hover:text-white hover:bg-white/10">
                   <Link to="/profile" className="flex items-center gap-2">
                     <Avatar className="h-6 w-6">
                       <AvatarImage src={user.photoURL || ''} alt={user.displayName || ''} />
@@ -115,18 +153,18 @@ const Navbar = () => {
                         {user.displayName ? user.displayName.charAt(0).toUpperCase() : <User className="h-3 w-3" />}
                       </AvatarFallback>
                     </Avatar>
-                    <span className="hidden lg:inline">Profile</span>
+                    <span className="hidden lg:inline text-white">Profile</span>
                   </Link>
                 </Button>
                 
                 {user.isAdmin && (
-                  <Button asChild variant="ghost" size="sm">
+                  <Button asChild variant="ghost" size="sm" className="text-white hover:text-white hover:bg-white/10">
                     <Link to="/admin">Admin</Link>
                   </Button>
                 )}
               </div>
             ) : (
-              <Button asChild variant="ghost" size="sm">
+              <Button asChild variant="ghost" size="sm" className="text-white hover:text-white hover:bg-white/10">
                 <Link to="/login" className="flex items-center gap-1">
                   <LogIn className="h-4 w-4" />
                   <span>Login</span>
@@ -141,25 +179,30 @@ const Navbar = () => {
             </Button>
             
             {/* Shopping Cart Button */}
-            <ShoppingCart />
+            <div className="text-white [&_button]:text-white [&_svg]:text-white [&_button]:hover:text-white [&_svg]:hover:text-white">
+              <ShoppingCart />
+            </div>
           </div>
           
           {/* Mobile menu toggle button - smaller height */}
-          <div className="md:hidden flex items-center space-x-2">
-            {/* Cart Icon for Mobile */}
-            <ShoppingCart />
+          <div className="md:hidden flex items-center space-x-2 text-white">
+            {!isMenuOpen && (
+              <div className="text-white [&_button]:text-white [&_svg]:text-white [&_button]:hover:text-white [&_svg]:hover:text-white">
+                <ShoppingCart />
+              </div>
+            )}
             
             {/* Toggle button */}
             <button 
               id="menu-button"
-              className="p-1 rounded-full text-gray-700 hover:bg-gray-100 transition-colors focus:outline-none"
+              className={`p-1 rounded-full ${isMenuOpen ? 'text-gray-700 hover:bg-gray-100' : 'text-white'} transition-colors focus:outline-none`}
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
-                <X className="h-5 w-5" />
+                <X className="h-6 w-6" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu className="h-6 w-6 text-white" />
               )}
             </button>
           </div>
@@ -168,41 +211,26 @@ const Navbar = () => {
       
       {/* Enhanced Mobile menu with better UI/UX */}
       {isMenuOpen && (
-        <div id="mobile-navbar" className="md:hidden fixed inset-0 mt-14 bg-white z-40 animate-fade-in">
-          <div className="container mx-auto px-4 py-6">
-            <div className="absolute top-3 right-4">
-              <button 
-                className="p-2 rounded-full text-gray-700 hover:bg-gray-100 transition-colors focus:outline-none"
-                onClick={toggleMenu}
-                aria-label="Close menu"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-            
+        <div id="mobile-navbar" className="md:hidden fixed inset-0 top-14 bg-white z-40 animate-fade-in overflow-auto">
+          <div className="container mx-auto px-4 py-4">
             {/* User Info if logged in */}
             {user && (
-              <div className="mb-6 flex items-center gap-3">
-                <Avatar className="h-12 w-12">
+              <div className="mb-4 flex items-center gap-3">
+                <Avatar className="h-10 w-10">
                   <AvatarImage src={user.photoURL || ''} alt={user.displayName || ''} />
                   <AvatarFallback>
-                    {user.displayName ? user.displayName.charAt(0).toUpperCase() : <User className="h-5 w-5" />}
+                    {user.displayName ? user.displayName.charAt(0).toUpperCase() : <User className="h-4 w-4" />}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-medium">{user.displayName || 'User'}</p>
-                  <p className="text-sm text-muted-foreground">{user.email}</p>
+                  <p className="font-medium text-sm">{user.displayName || 'User'}</p>
+                  <p className="text-xs text-muted-foreground">{user.email}</p>
                 </div>
               </div>
             )}
             
-            {/* Company Info */}
-            <div className="mb-6">
-              <div className="text-primary font-bold text-xl mb-2">Sri Pavan Computers</div>
-              <p className="text-gray-600 text-sm">Empowering your tech journey with premium IT products and expert-driven solutions you can trust.</p>
-            </div>
-            
-            <nav className="flex flex-col space-y-1">
+            {/* Navigation Links - Made more compact */}
+            <nav className="flex flex-col">
               <NavLinks 
                 isActive={isActive} 
                 isMobile={true} 
@@ -212,26 +240,26 @@ const Navbar = () => {
             </nav>
             
             {/* Authentication Links for Mobile */}
-            <div className="mt-6 space-y-3">
+            <div className="mt-4 space-y-2">
               {user ? (
                 <>
                   <Link
                     to="/profile"
                     onClick={closeMenu}
-                    className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+                    className="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
                   >
-                    <User size={18} className="text-primary" />
-                    <span className="font-medium">My Profile</span>
+                    <User size={16} className="text-primary" />
+                    <span className="font-medium text-sm">My Profile</span>
                   </Link>
                   
                   {user.isAdmin && (
                     <Link
                       to="/admin"
                       onClick={closeMenu}
-                      className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
+                      className="flex items-center justify-center gap-2 py-2 px-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors"
                     >
-                      <User size={18} className="text-primary" />
-                      <span className="font-medium">Admin Dashboard</span>
+                      <User size={16} className="text-primary" />
+                      <span className="font-medium text-sm">Admin Dashboard</span>
                     </Link>
                   )}
                   
@@ -241,7 +269,7 @@ const Navbar = () => {
                       logOut();
                       closeMenu();
                     }}
-                    className="w-full flex items-center justify-center gap-2 py-3 px-4"
+                    className="w-full flex items-center justify-center gap-2 py-2 px-4"
                   >
                     <LogOut size={18} className="text-red-500" />
                     <span className="font-medium">Sign Out</span>
@@ -249,14 +277,14 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <Button asChild variant="outline" className="w-full rounded-lg py-3">
+                  <Button asChild variant="outline" className="w-full rounded-lg py-2 text-sm">
                     <Link to="/login" onClick={closeMenu}>
                       <LogIn className="mr-2 h-4 w-4" />
                       Login
                     </Link>
                   </Button>
                   
-                  <Button asChild className="w-full rounded-lg py-3">
+                  <Button asChild className="w-full rounded-lg py-2 text-sm">
                     <Link to="/signup" onClick={closeMenu}>
                       Sign Up
                     </Link>
@@ -264,12 +292,12 @@ const Navbar = () => {
                 </>
               )}
               
-              <a href="tel:+919848075759" className="flex items-center justify-center py-3 px-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
-                <Phone size={18} className="mr-2 text-primary" />
+              <a href="tel:+919848075759" className="flex items-center justify-center py-2 px-4 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-sm">
+                <Phone size={16} className="mr-2 text-primary" />
                 <span className="font-medium">+91 98480 75759</span>
               </a>
               
-              <Button asChild variant="secondary" className="w-full rounded-lg py-3 shadow-md">
+              <Button asChild variant="secondary" className="w-full rounded-lg py-2 text-sm shadow-md">
                 <Link to="/pc-builder" onClick={closeMenu}>
                   Build Your Dream PC
                 </Link>
@@ -279,40 +307,6 @@ const Navbar = () => {
         </div>
       )}
     </header>
-  );
-};
-
-// Separate component for navigation links with improved styling
-const NavLinks = ({ 
-  isActive, 
-  isMobile, 
-  closeMenu,
-  scrollToSection
-}: { 
-  isActive: (path: string) => boolean; 
-  isMobile: boolean;
-  closeMenu: () => void;
-  scrollToSection: (sectionId: string) => void;
-}) => {
-  // Enhanced link styles for better mobile and desktop experience
-  const linkClass = isMobile 
-    ? "text-base font-medium text-center block py-3 px-2 rounded-lg transition-colors hover:bg-gray-50 hover:text-primary" 
-    : "px-3 py-1.5 rounded-md transition-colors text-gray-700 hover:text-primary";
-  
-  const activeLinkClass = isMobile
-    ? "text-base font-bold text-center block py-3 px-2 rounded-lg bg-gray-50 text-primary"
-    : "px-3 py-1.5 rounded-md font-medium text-primary";
-  
-  return (
-    <>
-      <Link to="/" className={isActive('/') ? activeLinkClass : linkClass} onClick={closeMenu}>Home</Link>
-      <Link to="/about" className={isActive('/about') ? activeLinkClass : linkClass} onClick={closeMenu}>About</Link>
-      <Link to="/products" className={isActive('/products') ? activeLinkClass : linkClass} onClick={closeMenu}>Products</Link>
-      <Link to="/services" className={isActive('/services') ? activeLinkClass : linkClass} onClick={closeMenu}>Services</Link>
-      <Link to="/brands" className={isActive('/brands') ? activeLinkClass : linkClass} onClick={closeMenu}>Brands</Link>
-      <Link to="/gallery" className={isActive('/gallery') ? activeLinkClass : linkClass} onClick={closeMenu}>Gallery</Link>
-      <Link to="/contact" className={isActive('/contact') ? activeLinkClass : linkClass} onClick={closeMenu}>Contact</Link>
-    </>
   );
 };
 
