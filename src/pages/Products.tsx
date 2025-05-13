@@ -1,11 +1,18 @@
-
 import React, { useState, useEffect } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import ProductCard, { ProductProps } from '@/components/ProductCard';
 import { Button } from "@/components/ui/button";
-import { Search } from 'lucide-react';
+import { Search, SortAsc, SortDesc } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Link } from 'react-router-dom';
+import { 
+  Select, 
+  SelectContent, 
+  SelectItem, 
+  SelectTrigger, 
+  SelectValue 
+} from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 
 // Mock product data with fixed image links
 const productsData: ProductProps[] = [
@@ -140,23 +147,68 @@ const categories = [
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("default");
+  const [priceRange, setPriceRange] = useState([0, 120000]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const productsPerPage = 8;
   const { toast } = useToast();
+  
+  // Simulate loading
+  useEffect(() => {
+    // Simulate data loading
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [selectedCategory, searchTerm, priceRange]);
   
   // Scroll to top when page loads
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   
-  // Filter products based on category and search term
+  // Filter products based on category, search term, and price range
   const filteredProducts = productsData.filter(product => {
     const matchesCategory = selectedCategory === "All Products" || product.category === selectedCategory;
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                          product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          product.brand.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1];
     
-    return matchesCategory && matchesSearch;
+    return matchesCategory && matchesSearch && matchesPrice;
   });
 
+  // Sort products based on selected sort option
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    switch(sortBy) {
+      case "price-low-high":
+        return a.price - b.price;
+      case "price-high-low":
+        return b.price - a.price;
+      case "name-a-z":
+        return a.name.localeCompare(b.name);
+      case "name-z-a":
+        return b.name.localeCompare(a.name);
+      default:
+        return 0;
+    }
+  });
+
+  // Pagination logic
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = sortedProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
+  
+  const handleViewProduct = (productId: string) => {
+    toast({
+      title: "Product Selected",
+      description: `You selected product #${productId}. View details page coming soon!`,
+    });
+  };
+  
   return (
     <div className="bg-gray-50 min-h-screen ">
       {/* Hero section */}
@@ -191,61 +243,158 @@ const Products = () => {
             </div>
           </div>
           
-          {/* Categories */}
-          <div className="flex flex-wrap gap-2 mb-8 overflow-x-auto pb-2">
-            {categories.map(category => (
-              <Button
-                key={category}
-                variant={selectedCategory === category ? "default" : "outline"}
-                onClick={() => setSelectedCategory(category)}
-                className={selectedCategory === category ? "" : "bg-white"}
-                size="sm"
-              >
-                {category}
-              </Button>
-            ))}
+          {/* Filters and sorting */}
+          <div className="flex flex-col md:flex-row gap-4 mb-6">
+            {/* Categories */}
+            <div className="flex flex-wrap gap-2 overflow-x-auto pb-2 flex-grow">
+              {categories.map(category => (
+                <button
+                  key={category}
+                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                    selectedCategory === category
+                      ? "bg-primary text-white"
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                  }`}
+                  onClick={() => {
+                    setSelectedCategory(category);
+                    setCurrentPage(1);
+                  }}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+            
+            {/* Sorting */}
+            <div className="min-w-[200px]">
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Sort by" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="default">Default</SelectItem>
+                  <SelectItem value="price-low-high">
+                    <div className="flex items-center">
+                      <SortAsc className="mr-2 h-4 w-4" />
+                      Price: Low to High
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="price-high-low">
+                    <div className="flex items-center">
+                      <SortDesc className="mr-2 h-4 w-4" />
+                      Price: High to Low
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="name-a-z">Name: A to Z</SelectItem>
+                  <SelectItem value="name-z-a">Name: Z to A</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          {/* Price range filter */}
+          <div className="mb-8">
+            <h3 className="font-medium mb-2">Price Range: ₹{priceRange[0].toLocaleString()} - ₹{priceRange[1].toLocaleString()}</h3>
+            <Slider
+              defaultValue={[0, 120000]}
+              max={120000}
+              step={1000}
+              value={priceRange}
+              onValueChange={setPriceRange}
+              className="my-4"
+            />
           </div>
           
-          {/* Products grid with animations */}
-          {filteredProducts.length > 0 ? (
+          {/* Results count */}
+          <p className="text-gray-600 mb-4">
+            Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
+          </p>
+          
+          {/* Products grid */}
+          {isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {filteredProducts.map((product, index) => (
-                <div 
-                  key={product.id} 
-                  className="animate-fade-in" 
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <ProductCard product={product} />
-                </div>
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="bg-gray-100 rounded-lg h-80 animate-pulse"></div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-16">
-              <p className="text-lg text-gray-500">No products found matching your search criteria.</p>
-              <Button 
-                variant="outline" 
-                className="mt-4"
-                onClick={() => {
-                  setSelectedCategory("All Products");
-                  setSearchTerm("");
-                }}
-              >
-                Clear filters
-              </Button>
+            <>
+              {currentProducts.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                  {currentProducts.map(product => (
+                    <ProductCard 
+                      key={product.id}
+                      product={product}
+                      onView={() => handleViewProduct(product.id)}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <p className="text-xl text-gray-600">No products found matching your criteria.</p>
+                  <Button 
+                    variant="outline" 
+                    className="mt-4" 
+                    onClick={() => {
+                      setSelectedCategory("All Products");
+                      setSearchTerm("");
+                      setPriceRange([0, 120000]);
+                    }}
+                  >
+                    Reset Filters
+                  </Button>
+                </div>
+              )}
+            </>
+          )}
+          
+          {/* Pagination */}
+          {!isLoading && totalPages > 1 && (
+            <div className="flex justify-center mt-12">
+              <div className="flex space-x-1">
+                <Button 
+                  variant="outline" 
+                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                  disabled={currentPage === 1}
+                  className="px-4"
+                >
+                  Previous
+                </Button>
+                
+                {Array.from({ length: totalPages }).map((_, index) => (
+                  <Button
+                    key={index}
+                    variant={currentPage === index + 1 ? "default" : "outline"}
+                    onClick={() => setCurrentPage(index + 1)}
+                    className="w-10 h-10"
+                  >
+                    {index + 1}
+                  </Button>
+                ))}
+                
+                <Button 
+                  variant="outline" 
+                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                  disabled={currentPage === totalPages}
+                  className="px-4"
+                >
+                  Next
+                </Button>
+              </div>
             </div>
           )}
         </div>
       </section>
       
-      {/* Smartphone & Tablets CTA */}
-      <section className="py-16 bg-white">
+      {/* Smartphones & Tablets CTA */}
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-5xl mx-auto bg-primary text-white rounded-lg overflow-hidden shadow-lg">
+          <div className="max-w-5xl mx-auto bg-white/10 backdrop-blur-sm rounded-lg overflow-hidden shadow-lg">
             <div className="flex flex-col md:flex-row">
               <div className="md:w-2/5">
                 <img 
-                  src="https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?q=80&w=2070" 
-                  alt="Smartphone & Tablets" 
+                  src="https://images.samsung.com/in/smartphones/galaxy-s23-ultra/buy/product_color_phantom_black.png?imwidth=480" 
+                  alt="Smartphones & Tablets" 
                   className="w-full h-full object-cover"
                 />
               </div>

@@ -1,7 +1,5 @@
-
 import React from 'react';
 import SectionHeading from '@/components/SectionHeading';
-import ServiceCard from '@/components/ServiceCard';
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
 import { 
@@ -9,74 +7,86 @@ import {
   Laptop, Monitor, Printer, Headphones, CloudCog,
   Smartphone, ArrowRight
 } from 'lucide-react';
+import EnhancedServiceCard from '@/components/EnhancedServiceCard';
 
-// Services data
+// Services data with background images
 const services = [
   {
     id: "1",
     title: "Computer Repair",
     icon: Hammer,
-    description: "Expert repair services for desktops, laptops, and all computer hardware with quick turnaround time."
+    description: "Expert repair services for desktops, laptops, and all computer hardware with quick turnaround time.",
+    backgroundImage: "https://content.jdmagicbox.com/comp/def_content/computer_repair_and_services/default-computer-repair-and-services-9.jpg"
   },
   {
     id: "2",
     title: "Data Recovery",
     icon: HardDrive,
-    description: "Professional recovery of lost data from crashed hard drives, corrupted storage, and formatted media."
+    description: "Professional recovery of lost data from crashed hard drives, corrupted storage, and formatted media.",
+    backgroundImage: "https://www.securedatarecovery.com/Media/blog/2023/data-recovery-possible-after-formatting.webp"
   },
   {
     id: "3",
     title: "Networking Solutions",
     icon: WifiIcon,
-    description: "Complete networking setup including routers, switches, access points, and network security."
+    description: "Complete networking setup including routers, switches, access points, and network security.",
+    backgroundImage: "https://www.portmantech.com/wp-content/uploads/2024/06/Networking-Solutions-1400x788.jpg"
   },
   {
     id: "4",
     title: "Software Solutions",
     icon: Database,
-    description: "Software installation, configuration, and troubleshooting for business and personal needs."
+    description: "Software installation, configuration, and troubleshooting for business and personal needs.",
+    backgroundImage: "https://media.istockphoto.com/id/1307368904/vector/pc-bug-fixing-installing-update-process-concept.jpg?s=612x612&w=0&k=20&c=d3nCOCGguewG6cTwBCjh7tiYmf_kZEZn6SE6fEiufQQ="
   },
   {
     id: "5",
     title: "IT Security",
     icon: ShieldCheck,
-    description: "Comprehensive security solutions including antivirus, firewall setup, and data protection."
+    description: "Comprehensive security solutions including antivirus, firewall setup, and data protection.",
+    backgroundImage: "https://www.itarian.com/images/endpoint-security.webp"
   },
   {
     id: "6",
     title: "Laptop Repair",
     icon: Laptop,
-    description: "Specialized laptop repairs including screen replacement, keyboard fixing, and component upgrades."
+    description: "Specialized laptop repairs including screen replacement, keyboard fixing, and component upgrades.",
+    backgroundImage: "https://innovativesystem.net/wp-content/uploads/2021/03/iphone-1067975-1920-1920x1439-11.jpg"
   },
   {
     id: "7",
     title: "Monitor Repair",
     icon: Monitor,
-    description: "LCD/LED monitor diagnostics and repair services for all major brands."
+    description: "LCD/LED monitor diagnostics and repair services for all major brands.",
+    backgroundImage: "https://image-us.samsung.com/SamsungUS/support/solutions/tv-and-home-theater/tv/TV_HT-TV_Get-your-cracked-screen-replaced.png"
   },
   {
     id: "8",
     title: "Printer Service",
     icon: Printer,
-    description: "Printer maintenance, repair, and cartridge refilling for inkjet and laser printers."
+    description: "Printer maintenance, repair, and cartridge refilling for inkjet and laser printers.",
+    backgroundImage: "https://5.imimg.com/data5/HY/EN/KR/ANDROID-56750901/1556003706123-jpg-500x500.jpg"
   },
   {
     id: "9",
     title: "Technical Support",
     icon: Headphones,
-    description: "Remote and on-site technical support for all your computer-related issues."
+    description: "Remote and on-site technical support for all your computer-related issues.",
+    backgroundImage: "https://redriver.com/wp-content/uploads/2025/02/Onsite-IT-Support-vs.-Remote-IT-Support-Services.jpg"
   },
   {
     id: "10",
     title: "Cloud Services",
     icon: CloudCog,
-    description: "Cloud storage setup, backup solutions, and cloud migration services."
+    description: "Cloud storage setup, backup solutions, and cloud migration services.",
+    backgroundImage: "https://www.ntiva.com/hs-fs/hubfs/cloud%20migration.jpg?width=2258&height=1504&name=cloud%20migration.jpg"
   },
   {
     id: "11",
     title: "Mobile Repair",
     icon: Smartphone,
-    description: "Smartphone and tablet repairs including screen replacement, battery replacement, and software issues."
+    description: "Smartphone and tablet repairs including screen replacement, battery replacement, and software issues.",
+    backgroundImage: "https://phonelife.com.au/wp-content/uploads/2017/08/shutterstock_372530740.jpg"
   }
 ];
 
@@ -93,7 +103,7 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services overview */}
+      {/* Services overview - Updated to use EnhancedServiceCard */}
       <section className="py-16">
         <div className="container mx-auto px-4">
           <SectionHeading 
@@ -103,12 +113,15 @@ const Services = () => {
           />
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-            {services.map(service => (
-              <ServiceCard 
+            {services.map((service, index) => (
+              <EnhancedServiceCard 
                 key={service.id}
                 title={service.title}
                 icon={service.icon}
                 description={service.description}
+                backgroundImage={service.backgroundImage}
+                link="/contact"
+                animationDelay={index * 100} // Staggered animation for visual appeal
               />
             ))}
           </div>
