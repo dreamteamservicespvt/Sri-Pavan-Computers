@@ -32,6 +32,7 @@ const LoginForm: React.FC = () => {
   const from = location.state?.from?.pathname || '/';
   
   const [isLoading, setIsLoading] = React.useState(false);
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
   
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -44,6 +45,7 @@ const LoginForm: React.FC = () => {
   const onSubmit = async (data: LoginFormValues) => {
     try {
       setIsLoading(true);
+      setErrorMessage(null);
       const userData = await signIn(data.email, data.password);
       
       // Check if the user is an admin and redirect accordingly
@@ -52,8 +54,10 @@ const LoginForm: React.FC = () => {
       } else {
         navigate(from, { replace: true });
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Login error:', error);
+      setErrorMessage(error.message || "Failed to sign in. Please check your credentials.");
+    } finally {
       setIsLoading(false);
     }
   };
@@ -63,6 +67,17 @@ const LoginForm: React.FC = () => {
       <div className="text-center space-y-2">
         <h1 className="text-2xl font-bold">Welcome Back</h1>
         <p className="text-muted-foreground">Enter your credentials to access your account</p>
+      </div>
+      
+      {errorMessage && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+          {errorMessage}
+        </div>
+      )}
+      
+      {/* Development login hint - remove in production */}
+      <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-3 rounded-md text-sm">
+        <strong>Development Login:</strong> Use email <code>admin@sripavancomputers.com</code> and password <code>admin123</code>
       </div>
       
       <Form {...form}>

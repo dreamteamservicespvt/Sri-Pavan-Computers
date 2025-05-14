@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -23,13 +22,24 @@ import SignUp from '@/pages/SignUp'
 import ForgotPassword from '@/pages/ForgotPassword'
 import Profile from '@/pages/Profile'
 import Unauthorized from '@/pages/Unauthorized'
-import Dashboard from '@/pages/admin/Dashboard'
-import AdminLayout from '@/components/admin/AdminLayout'
 import { CartProvider } from './hooks/use-cart'
 import { AuthProvider } from './hooks/use-auth'
 import ProtectedRoute from './components/ProtectedRoute'
 import { Toaster } from '@/components/ui/toaster'
 import './App.css'
+
+// Import admin pages with more explicit paths
+import Dashboard from './pages/admin/Dashboard';
+import ProductsAdmin from './pages/admin/ProductsAdmin';
+import ServicesAdmin from './pages/admin/ServicesAdmin';
+import TeamAdmin from './pages/admin/TeamAdmin';
+import GalleryAdmin from './pages/admin/GalleryAdmin';
+import BrandsAdmin from './pages/admin/BrandsAdmin';
+import OrdersAdmin from './pages/admin/OrdersAdmin';
+import MessagesAdmin from './pages/admin/MessagesAdmin';
+import SettingsAdmin from './pages/admin/SettingsAdmin';
+
+import AdminLayout from '@/components/admin/AdminLayout';
 
 function App() {
   return (
@@ -45,7 +55,14 @@ function App() {
               </ProtectedRoute>
             }>
               <Route index element={<Dashboard />} />
-              {/* Add more admin routes here */}
+              <Route path="products" element={<ProductsAdmin />} />
+              <Route path="services" element={<ServicesAdmin />} />
+              <Route path="team" element={<TeamAdmin />} />
+              <Route path="gallery" element={<GalleryAdmin />} />
+              <Route path="brands" element={<BrandsAdmin />} />
+              <Route path="orders" element={<OrdersAdmin />} />
+              <Route path="messages" element={<MessagesAdmin />} />
+              <Route path="settings" element={<SettingsAdmin />} />
             </Route>
             
             {/* Auth Routes */}

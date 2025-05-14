@@ -39,18 +39,43 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Convert Firebase user to our UserData
   const formatUserData = async (firebaseUser: User): Promise<UserData> => {
-    // Check if user is an admin by looking at Firestore
-    const userRef = doc(db, 'users', firebaseUser.uid);
-    const userSnap = await getDoc(userRef);
-    const isAdmin = userSnap.exists() ? userSnap.data().isAdmin || false : false;
-    
-    return {
-      uid: firebaseUser.uid,
-      email: firebaseUser.email,
-      displayName: firebaseUser.displayName,
-      photoURL: firebaseUser.photoURL,
-      isAdmin
-    };
+    try {
+      // Check if user is an admin by looking at Firestore
+      const userRef = doc(db, 'users', firebaseUser.uid);
+      const userSnap = await getDoc(userRef);
+      let isAdmin = false;
+      
+      if (userSnap.exists()) {
+        isAdmin = userSnap.data().isAdmin || false;
+      } else {
+        // Create user document if it doesn't exist
+        await setDoc(userRef, {
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName: firebaseUser.displayName,
+          photoURL: firebaseUser.photoURL,
+          isAdmin: false,
+          createdAt: new Date().toISOString(),
+        });
+      }
+      
+      return {
+        uid: firebaseUser.uid,
+        email: firebaseUser.email,
+        displayName: firebaseUser.displayName,
+        photoURL: firebaseUser.photoURL,
+        isAdmin
+      };
+    } catch (error) {
+      console.error("Error formatting user data:", error);
+      return {
+        uid: firebaseUser.uid,
+        email: firebaseUser.email,
+        displayName: firebaseUser.displayName,
+        photoURL: firebaseUser.photoURL,
+        isAdmin: false
+      };
+    }
   };
 
   // Listen for authentication state changes
@@ -114,53 +139,70 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       setLoading(true);
       
-      // Check for hardcoded admin credentials - bypass Firebase auth
-      if (email === 'Spc@gmail.com' && password === 'Spc@12345') {
-        // Create a mock admin user without Firebase authentication
+      // DEVELOPMENT FALLBACK: Hardcoded admin credentials for testing/development
+      // This allows admin access without requiring Firebase to be fully configured
+      // IMPORTANT: Remove or secure this in production!
+      if (email === 'admin@sripavancomputers.com' && password === 'admin123') {
         const mockAdminUser: UserData = {
           uid: 'admin-user-id',
           email: email,
-          displayName: 'Admin',
+          displayName: 'Admin User',
           photoURL: null,
           isAdmin: true
         };
         
-        // Update the user state
         setUser(mockAdminUser);
         
         toast({
           title: "Signed in successfully",
-          description: "Welcome back, Admin!",
+          description: "Welcome to the admin dashboard! (Development mode)",
           duration: 3000,
         });
         
         return mockAdminUser;
       }
       
-      // If not admin credentials, proceed with normal login
-      // (You can uncomment this when Firebase is properly set up)
-      /*
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const userData = await formatUserData(userCredential.user);
-      
-      toast({
-        title: "Signed in successfully",
-        description: "Welcome back!",
-        duration: 3000,
-      });
-      
-      return userData;
-      */
-      
-      // For now, just reject non-admin logins
-      throw new Error("Invalid email or password");
+      // Standard Firebase authentication
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userData = await formatUserData(userCredential.user);
+        
+        toast({
+          title: "Signed in successfully",
+          description: userData.isAdmin ? "Welcome to the admin dashboard!" : "Welcome back!",
+          duration: 3000,
+        });
+        
+        return userData;
+      } catch (firebaseError: any) {
+        // Handle specific Firebase error codes with more user-friendly messages
+        let errorMessage = "Invalid email or password";
+        
+        if (firebaseError.code === 'auth/invalid-credential') {
+          errorMessage = "Invalid email or password. Please check your credentials and try again.";
+        } else if (firebaseError.code === 'auth/user-not-found') {
+          errorMessage = "No account exists with this email. Please check your email or sign up.";
+        } else if (firebaseError.code === 'auth/wrong-password') {
+          errorMessage = "Incorrect password. Please try again.";
+        } else if (firebaseError.code === 'auth/too-many-requests') {
+          errorMessage = "Too many failed login attempts. Please try again later or reset your password.";
+        } else if (firebaseError.code === 'auth/user-disabled') {
+          errorMessage = "This account has been disabled. Please contact support.";
+        } else if (firebaseError.code) {
+          errorMessage = `Error: ${firebaseError.code.replace('auth/', '')}`;
+        }
+        
+        toast({
+          title: "Sign in failed",
+          description: errorMessage,
+          variant: "destructive",
+          duration: 5000,
+        });
+        
+        throw new Error(errorMessage);
+      }
     } catch (error: any) {
-      toast({
-        title: "Sign in failed",
-        description: error.message || "Invalid email or password",
-        variant: "destructive",
-        duration: 5000,
-      });
+      console.error('Login error:', error);
       throw error;
     } finally {
       setLoading(false);
