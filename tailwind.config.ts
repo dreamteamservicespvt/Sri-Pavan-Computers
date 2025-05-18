@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -91,6 +90,41 @@ export default {
                 'rotate-slow': {
                     '0%': { transform: 'rotate(0deg)' },
                     '100%': { transform: 'rotate(360deg)' },
+                },
+                'bounce-slow': {
+                    '0%, 100%': { transform: 'translateY(0)' },
+                    '50%': { transform: 'translateY(-15px)' },
+                },
+                'pulse-dot': {
+                    '0%, 100%': { 
+                        transform: 'scale(0.8)',
+                        opacity: '0.5' 
+                    },
+                    '50%': { 
+                        transform: 'scale(1.2)',
+                        opacity: '1' 
+                    }
+                },
+                'blink': {
+                    '0%, 100%': { borderColor: 'transparent' },
+                    '50%': { borderColor: 'hsl(var(--primary))' }
+                },
+                'pulse-ring': {
+                    '0%': { transform: 'scale(0.7)', opacity: '0.5' },
+                    '50%': { transform: 'scale(1.2)', opacity: '0' },
+                    '100%': { transform: 'scale(0.7)', opacity: '0' }
+                },
+                'shine': {
+                    '0%': { transform: 'translateX(-100%) skewX(-20deg)' },
+                    '100%': { transform: 'translateX(200%) skewX(-20deg)' }
+                },
+                'typing': {
+                    'from': { width: '0' },
+                    'to': { width: '100%' }
+                },
+                'blink-caret': {
+                    'from, to': { borderColor: 'transparent' },
+                    '50%': { borderColor: '#02315b' }
                 }
 			},
 			animation: {
@@ -102,6 +136,12 @@ export default {
                 'float': 'float 3s ease-in-out infinite',
                 'pulse-subtle': 'pulse-subtle 2s ease-in-out infinite',
                 'rotate-slow': 'rotate-slow 12s linear infinite',
+                'bounce-slow': 'bounce-slow 2s ease-in-out infinite',
+                'pulse-dot': 'pulse-dot 1.5s ease-in-out infinite',
+                'pulse-ring': 'pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'shine': 'shine 2s infinite',
+                'typing': 'typing 2.5s steps(30, end)',
+                'blink-caret': 'blink-caret 0.75s step-end infinite'
 			},
 			fontFamily: {
 				sans: ['Inter', 'Satoshi', 'sans-serif'],
