@@ -117,7 +117,7 @@ const Footer = () => {
             
             {/* Social Media Links - Premium redesign */}
             <h4 className="text-lg font-semibold mt-6 mb-3 text-white">Connect With Us</h4>
-            <div className="flex space-x-4">
+            <div className="flex flex-wrap gap-2 md:gap-3 lg:gap-4">
               <a 
                 href="https://instagram.com" 
                 target="_blank" 
@@ -125,7 +125,7 @@ const Footer = () => {
                 className="text-gray-400 hover:text-white transition-all duration-300 group"
                 aria-label="Follow us on Instagram"
               >
-                <div className="p-2 rounded-full bg-gray-800 group-hover:bg-gradient-to-br group-hover:from-purple-600 group-hover:via-pink-500 group-hover:to-orange-400 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
+                <div className="p-2.5 md:p-2 rounded-full bg-gray-800 group-hover:bg-gradient-to-br group-hover:from-purple-600 group-hover:via-pink-500 group-hover:to-orange-400 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
                   <Instagram className="h-5 w-5" />
                 </div>
               </a>
@@ -136,7 +136,7 @@ const Footer = () => {
                 className="text-gray-400 hover:text-white transition-all duration-300 group"
                 aria-label="Follow us on Facebook"
               >
-                <div className="p-2 rounded-full bg-gray-800 group-hover:bg-blue-600 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
+                <div className="p-2.5 md:p-2 rounded-full bg-gray-800 group-hover:bg-blue-600 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
                   <Facebook className="h-5 w-5" />
                 </div>
               </a>
@@ -147,7 +147,7 @@ const Footer = () => {
                 className="text-gray-400 hover:text-white transition-all duration-300 group"
                 aria-label="Chat on WhatsApp"
               >
-                <div className="p-2 rounded-full bg-gray-800 group-hover:bg-green-500 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
+                <div className="p-2.5 md:p-2 rounded-full bg-gray-800 group-hover:bg-green-500 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
                   <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.88 9.88 0 01-5.032-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.88 9.88 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
                   </svg>
@@ -160,7 +160,7 @@ const Footer = () => {
                 className="text-gray-400 hover:text-white transition-all duration-300 group"
                 aria-label="Follow us on X (Twitter)"
               >
-                <div className="p-2 rounded-full bg-gray-800 group-hover:bg-black transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
+                <div className="p-2.5 md:p-2 rounded-full bg-gray-800 group-hover:bg-black transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
                   <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
                     <path d="M13.92 3.248c.669-.05 1.338.05 1.958.3.659.25 1.248.7 1.657 1.247h3.08L19.38 6.02c.1.05.198.099.297.148v.198c-.99.5-.179.1-.278.15l-1.057 1.048v.149c0 1.097-.1 2.145-.398 3.193a7.649 7.649 0 0 1-1.147 2.494 8.63 8.63 0 0 1-1.856 1.995 9.41 9.41 0 0 1-2.414 1.348 8.687 8.687 0 0 1-2.933.498 9.06 9.06 0 0 1-4.86-1.446.626.626 0 0 1-.2-.15.554.554 0 0 1-.02-.399c.03-.1.08-.198.18-.248.119-.05.218-.1.338-.1 1.177.05 2.265-.298 3.213-.994-.988-.248-1.687-.857-2.066-1.893h.578c.13 0 .24-.05.34-.1.099-.05.148-.149.148-.248 0-.99.05-.149 0-.198-1.028-.597-1.588-1.395-1.687-2.443v-.149c.37.2.738.3 1.128.3-.588-.398-.988-.956-1.247-1.594-.28-.548-.37-1.146-.28-1.745 0-.149.05-.248.15-.348a.66.66 0 0 1 .347-.149c.13 0 .23.05.3.1 1.337 1.553 3.014 2.391 5.011 2.54-.05-.199-.05-.448-.05-.647 0-.747.27-1.395.738-1.943a2.563 2.563 0 0 1 1.906-.846zm.548 2.094c-.249-.249-.548-.349-.897-.349-.349 0-.648.15-.897.399-.25.248-.349.547-.349.896 0 .1.02.199.05.298.13.1.03.15.05.199 0 .05.05.1.1.15.249.346.547.545.896.545.348 0 .647-.15.896-.399.25-.248.35-.547.35-.896 0-.1-.021-.199-.05-.298a.664.664 0 0 0-.15-.398v-.147z"/>
                   </svg>
@@ -173,7 +173,7 @@ const Footer = () => {
                 className="text-gray-400 hover:text-white transition-all duration-300 group"
                 aria-label="Subscribe on YouTube"
               >
-                <div className="p-2 rounded-full bg-gray-800 group-hover:bg-red-600 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
+                <div className="p-2.5 md:p-2 rounded-full bg-gray-800 group-hover:bg-red-600 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
                   <Youtube className="h-5 w-5" />
                 </div>
               </a>
@@ -184,7 +184,7 @@ const Footer = () => {
                 className="text-gray-400 hover:text-white transition-all duration-300 group"
                 aria-label="Join our Telegram channel"
               >
-                <div className="p-2 rounded-full bg-gray-800 group-hover:bg-blue-500 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
+                <div className="p-2.5 md:p-2 rounded-full bg-gray-800 group-hover:bg-blue-500 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
                   <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
                     <path d="M22.265 2.428a2.048 2.048 0 0 0-2.078-.324L2.266 9.339a2.043 2.043 0 0 0 .104 3.818l3.625 1.261 2.02 6.682a.998.998 0 0 0 .799.668.992.992 0 0 0 .905-.43l2.812-3.705 3.96 3.96a2.043 2.043 0 0 0 3.429-1.217l4.01-16.642a2.04 2.04 0 0 0-.665-2.306zm-4.502 17.163-5.647-5.647a.999.999 0 0 0-1.322-.084l-2.412 1.752-.644-2.127 7.11-4.699a.998.998 0 0 0-.4-1.858.985.985 0 0 0-.653.165l-8.656 5.727-3.179-1.104 16.993-6.803-1.19 14.678z"/>
                   </svg>
@@ -197,7 +197,7 @@ const Footer = () => {
                 className="text-gray-400 hover:text-white transition-all duration-300 group"
                 aria-label="Connect on LinkedIn"
               >
-                <div className="p-2 rounded-full bg-gray-800 group-hover:bg-blue-700 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
+                <div className="p-2.5 md:p-2 rounded-full bg-gray-800 group-hover:bg-blue-700 transform transition-transform group-hover:scale-110 shadow-sm group-hover:shadow-lg">
                   <Linkedin className="h-5 w-5" />
                 </div>
               </a>
