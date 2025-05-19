@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { getAnalytics, isSupported } from 'firebase/analytics';
 
-// Firebase configuration with optional measurementId for Analytics
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDkrYvenTa44MZQSxizXkOJto8Nr2LSPUs",
   authDomain: "sri-pavan-computers.firebaseapp.com",
@@ -12,7 +12,7 @@ const firebaseConfig = {
   storageBucket: "sri-pavan-computers.firebasestorage.app",
   messagingSenderId: "96955041621",
   appId: "1:96955041621:web:c443a9260dd68ecc2e11dc",
-  measurementId: "G-1NZ1BCX5BW" // Optional for Firebase JS SDK v7.20.0+
+  measurementId: "G-1NZ1BCX5BW"
 };
 
 // Initialize Firebase

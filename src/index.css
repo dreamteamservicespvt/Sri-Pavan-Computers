@@ -231,6 +231,96 @@
       typewriter 2.5s steps(30, end) 0.5s forwards,
       blink 0.8s step-end infinite;
   }
+
+  /* Enhanced Admin Dashboard Mobile Experience */
+  /* Premium mobile scrollbar for admin dashboard */
+  .admin-scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  .admin-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .admin-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  .admin-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Premium card effects for admin dashboard */
+  .admin-card-hover {
+    @apply transition-all duration-300;
+    transform: translateY(0);
+  }
+  
+  .admin-card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Reduced motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .admin-card-hover:hover {
+      transform: none;
+    }
+    
+    * {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Mobile-specific optimizations for admin dashboard */
+@media (max-width: 640px) {
+  /* Make buttons more tappable on mobile */
+  .admin-dashboard button, 
+  .admin-dashboard a, 
+  .admin-dashboard [role="button"] {
+    @apply min-h-10 min-w-10 touch-manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Optimize admin table displays for mobile */
+  .admin-mobile-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Fix inputs on mobile */
+  .admin-dashboard input,
+  .admin-dashboard select,
+  .admin-dashboard textarea {
+    font-size: 16px !important; /* Prevent zoom on iOS */
+  }
+  
+  /* Mobile-optimized shadows */
+  .mobile-shadow {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  }
+}
+
+/* Responsive typography for admin dashboard */
+.admin-heading-1 {
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+  line-height: 1.2;
+}
+
+.admin-heading-2 {
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  line-height: 1.25;
+}
+
+.admin-text {
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  line-height: 1.5;
 }
 
 /* Enhanced animations */

@@ -75,9 +75,6 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ fullScreen = true }) => {
           <p className="text-white font-medium text-lg md:text-xl text-center loading-tagline">
             One Stop for All Your Tech Needs.
           </p>
-          <p className="text-accent/90 font-light italic text-sm md:text-base text-center mt-3 second-tagline">
-            Rebuild Your Body, Redefine Your Confidence.
-          </p>
         </div>
         
         {/* Premium loading indicator with gradient animation */}

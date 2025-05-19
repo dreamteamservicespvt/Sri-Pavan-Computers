@@ -9,14 +9,13 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Loader2 } from 'lucide-react';
+import { Loader2, User, Lock } from 'lucide-react';
 
 const loginSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -46,12 +45,11 @@ const LoginForm: React.FC = () => {
     try {
       setIsLoading(true);
       setErrorMessage(null);
-      const userData = await signIn(data.email, data.password);
       
-      // Check if the user is an admin and redirect accordingly
-      if (userData && userData.isAdmin) {
-        navigate('/admin', { replace: true });
-      } else {
+      // Pass false to indicate this is not an admin login attempt
+      const userData = await signIn(data.email, data.password, false);
+      
+      if (userData) {
         navigate(from, { replace: true });
       }
     } catch (error: any) {
@@ -75,11 +73,6 @@ const LoginForm: React.FC = () => {
         </div>
       )}
       
-      {/* Development login hint - remove in production */}
-      <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-3 rounded-md text-sm">
-        <strong>Development Login:</strong> Use email <code>admin@sripavancomputers.com</code> and password <code>admin123</code>
-      </div>
-      
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
           <FormField
@@ -89,7 +82,10 @@ const LoginForm: React.FC = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="name@example.com" type="email" {...field} />
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Input placeholder="name@example.com" type="email" className="pl-10" {...field} />
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -111,7 +107,10 @@ const LoginForm: React.FC = () => {
                   </Link>
                 </div>
                 <FormControl>
-                  <Input placeholder="••••••••" type="password" {...field} />
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Input placeholder="••••••••" type="password" className="pl-10" {...field} />
+                  </div>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -135,13 +134,28 @@ const LoginForm: React.FC = () => {
         </form>
       </Form>
       
-      <div className="text-center">
+      <div className="pt-2 text-center">
         <p className="text-sm text-muted-foreground">
           Don't have an account?{" "}
           <Link to="/signup" className="font-medium text-primary hover:underline">
             Sign up
           </Link>
         </p>
+      </div>
+      
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-gray-200"></div>
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">Or</span>
+        </div>
+      </div>
+      
+      <div className="text-center text-sm">
+        <Link to="/admin/login" className="text-primary hover:underline font-medium">
+          Admin Login
+        </Link>
       </div>
     </div>
   );
