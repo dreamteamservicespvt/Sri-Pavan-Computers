@@ -12,22 +12,3 @@
   right: auto !important;
   transform: none !important;
 }
-
-/* Fix for vertical scrolling */
-html, body {
-  height: 100%;
-  overflow-y: auto !important;
-  position: relative;
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-}
-
-main {
-  flex: 1 0 auto;
-  position: relative;
-  overflow-y: auto;
-}
