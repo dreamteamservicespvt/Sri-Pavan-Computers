@@ -40,6 +40,8 @@ import BrandsAdmin from './pages/admin/BrandsAdmin';
 import OrdersAdmin from './pages/admin/OrdersAdmin';
 import MessagesAdmin from './pages/admin/MessagesAdmin';
 import SettingsAdmin from './pages/admin/SettingsAdmin';
+import AdminLogin from './pages/admin/AdminLogin'; // Make sure this import is added
+import AnalyticsAdmin from './pages/admin/AnalyticsAdmin'; // Add this import
 
 import AdminLayout from '@/components/admin/AdminLayout';
 
@@ -73,6 +75,7 @@ const AppContent = () => {
             </ProtectedRoute>
           }>
             <Route index element={<Dashboard />} />
+            <Route path="analytics" element={<AnalyticsAdmin />} /> {/* Add this line */}
             <Route path="products" element={<ProductsAdmin />} />
             <Route path="services" element={<ServicesAdmin />} />
             <Route path="team" element={<TeamAdmin />} />
@@ -273,12 +276,14 @@ function App() {
               <ScrollToTop />
               <Routes>
                 {/* Admin Routes */}
+                <Route path="/admin/login" element={<AdminLogin />} /> {/* Add this route */}
                 <Route path="/admin" element={
                   <ProtectedRoute requiresAdmin={true}>
                     <AdminLayout />
                   </ProtectedRoute>
                 }>
                   <Route index element={<Dashboard />} />
+                  <Route path="analytics" element={<AnalyticsAdmin />} /> {/* Add this line */}
                   <Route path="products" element={<ProductsAdmin />} />
                   <Route path="services" element={<ServicesAdmin />} />
                   <Route path="team" element={<TeamAdmin />} />
