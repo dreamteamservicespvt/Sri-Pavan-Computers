@@ -49,23 +49,34 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const { user, logOut } = useAuth();
   
+  // Determine if we're on the home page
+  const isHomePage = location.pathname === '/';
+  
   // Handle scroll event for navbar luxury transformation
   useEffect(() => {
+    // Set initial state based on both scroll position and current route
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      // If not on home page, always show solid background
+      if (!isHomePage) {
         setScrolled(true);
       } else {
-        setScrolled(false);
+        // On home page, use scroll position to determine background
+        if (window.scrollY > 20) {
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
       }
     };
     
     window.addEventListener('scroll', handleScroll);
+    // Call immediately to set initial state
     handleScroll();
     
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isHomePage]); // Add isHomePage as dependency to re-run on route changes
 
   // Close menu when clicking outside
   useEffect(() => {
