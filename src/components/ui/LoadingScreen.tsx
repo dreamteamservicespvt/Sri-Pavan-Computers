@@ -31,11 +31,16 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ fullScreen = true }) => {
 
   // Add effect to control body scrolling
   useEffect(() => {
-    document.body.classList.add('loading-active');
+    // Prevent body scrolling when loading screen is active
+    if (fullScreen) {
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Re-enable scrolling when component unmounts
     return () => {
-      document.body.classList.remove('loading-active');
+      document.body.style.overflow = 'auto';
     };
-  }, []);
+  }, [fullScreen]);
 
   return (
     <div className={`flex flex-col items-center justify-center bg-primary text-white ${
