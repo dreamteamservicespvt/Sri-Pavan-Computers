@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import { Button } from "@/components/ui/button";
@@ -258,7 +257,7 @@ const Contact = () => {
           
           <div className="mt-12 h-[400px] rounded-lg overflow-hidden shadow-md">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30543.593196466992!2d82.22005826269077!3d16.95763056889296!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3797c3e5a16c0d%3A0x33eb1c3b98626076!2sKakinada%2C%20Andhra%20Pradesh!5e0!3m2!1sen!2sin!4v1668459061374!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1908.228422898882!2d82.23177334906248!3d16.95206419787463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3827ddaf59b4f7%3A0x5c23a08ed5ddcaa6!2sSri%20Pavan%20Computers!5e0!3m2!1sen!2sin!4v1747666178527!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}

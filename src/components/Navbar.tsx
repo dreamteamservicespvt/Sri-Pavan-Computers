@@ -211,8 +211,8 @@ const Navbar = () => {
               </Link>
             </Button>
             
-            {/* Premium Shopping Cart Button */}
-            <div className="luxury-cart-btn">
+            {/* Premium Shopping Cart Button - Enhanced visibility */}
+            <div className={`luxury-cart-btn ${scrolled ? 'cart-scrolled' : 'cart-transparent'}`}>
               <ShoppingCart />
             </div>
           </div>
@@ -220,7 +220,7 @@ const Navbar = () => {
           {/* Mobile buttons with premium styling */}
           <div className="md:hidden flex items-center space-x-3">
             {!isMenuOpen && (
-              <div className="luxury-cart-mobile">
+              <div className={`luxury-cart-mobile ${scrolled ? 'cart-scrolled' : 'cart-transparent'}`}>
                 <ShoppingCart />
               </div>
             )}
@@ -516,6 +516,72 @@ const Navbar = () => {
         
         .luxury-logo-container:hover .luxury-logo-inner img {
           filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.7));
+        }
+
+        /* Enhanced Premium Cart Button Styling */
+        .luxury-cart-btn [role="button"],
+        .luxury-cart-mobile [role="button"] {
+          background: rgba(255, 255, 255, 0.25) !important; /* Increased opacity for better visibility */
+          backdrop-filter: blur(5px);
+          color: white;
+          transition: all 0.3s ease;
+          border: 1px solid rgba(255, 255, 255, 0.3) !important; /* Added light border */
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2) !important; /* Enhanced shadow */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          overflow: visible;
+          z-index: 5; /* Ensure proper stacking */
+        }
+        
+        .cart-scrolled [role="button"] {
+          background: rgba(255, 255, 255, 0.3) !important;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+        }
+        
+        .cart-transparent [role="button"] {
+          background: rgba(255, 255, 255, 0.25) !important;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2) !important;
+        }
+        
+        .luxury-cart-btn [role="button"]:hover,
+        .luxury-cart-mobile [role="button"]:hover {
+          background: rgba(255, 255, 255, 0.4) !important;
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25) !important;
+          border: 1px solid rgba(255, 255, 255, 0.5) !important;
+        }
+        
+        /* Cart Icon Styling */
+        .luxury-cart-btn svg,
+        .luxury-cart-mobile svg {
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)) !important;
+          stroke-width: 2.5 !important;
+          color: white !important; /* Force icon color to white */
+          opacity: 1 !important; /* Ensure full opacity */
+          height: 20px !important; /* Slightly larger icon */
+          width: 20px !important;
+        }
+        
+        /* Cart Badge Styling */
+        .luxury-cart-btn [data-count],
+        .luxury-cart-mobile [data-count] {
+          position: absolute;
+          top: -4px;
+          right: -4px;
+          background: #e74c3c;
+          color: white;
+          border-radius: 100%;
+          font-size: 10px;
+          font-weight: bold;
+          height: 16px;
+          width: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+          border: 1.5px solid white;
         }
         `}
       </style>

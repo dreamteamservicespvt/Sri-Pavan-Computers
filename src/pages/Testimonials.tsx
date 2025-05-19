@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import TestimonialCard from '@/components/TestimonialCard';
@@ -90,8 +89,13 @@ const Testimonials = () => {
       </section>
       
       {/* Testimonials section - with Auto Scrolling on Mobile */}
-      <section className="py-16">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Customers Say</h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto text-center">Hear from our satisfied clients about their experience</p>
+          </div>
+          
           <SectionHeading 
             title="Customer Testimonials" 
             subtitle="Don't just take our word for it - hear what our customers have to say"
