@@ -232,8 +232,14 @@ const Footer = () => {
                       <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 group-hover:from-blue-300 group-hover:to-indigo-400 transition-all duration-300">
                         Dream Team Services
                       </span>
-                      <svg className="h-4 w-4 ml-1 text-blue-400 group-hover:text-blue-300 transition-colors" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      {/* Fixed SVG with proper closing tag */}
+                      <svg 
+                        className="h-4 w-4 ml-1 text-blue-400 group-hover:text-blue-300 transition-colors" 
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
                   </div>
