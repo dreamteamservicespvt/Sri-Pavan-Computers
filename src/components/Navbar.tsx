@@ -143,7 +143,7 @@ const Navbar = () => {
               <div className="relative flex items-center justify-center luxury-logo-inner">
                 <img 
                   src="/logo.png" 
-                  alt="Sri Pavan Computers" 
+                  alt="Sri Pavan Computers - Computer Sales and Service Center in Kakinada" 
                   className="h-12 md:h-16 w-auto drop-shadow-xl transition-transform duration-500 group-hover:scale-105 z-10"
                 />
               </div>

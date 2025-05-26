@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import { Button } from "@/components/ui/button";
 import { 
   Phone, Mail, MapPin, Clock, MessageSquare, 
   Send, CheckCircle 
 } from 'lucide-react';
+import { useSEO } from '@/contexts/SEOContext';
 
 const Contact = () => {
+  const { updateSEO } = useSEO();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +17,16 @@ const Contact = () => {
     message: ''
   });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  
+  useEffect(() => {
+    updateSEO({
+      title: 'Contact Sri Pavan Computers | Computer Sales & Service in Kakinada',
+      description: 'Reach out to Sri Pavan Computers in Kakinada for all your computer sales, repair & IT service needs. Visit our store or contact us online for quick assistance. SEO by Dream Team Services.',
+      keywords: 'contact computer shop Kakinada, IT service contact, computer repair phone, laptop service appointment, tech support contact',
+      canonicalUrl: 'https://sripavancomputers.in/contact',
+      ogImage: 'https://sripavancomputers.in/images/contact-og.jpg'
+    });
+  }, [updateSEO]);
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -46,14 +58,24 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen ">
-      {/* Hero section */}
-      <section className="bg-primary text-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Contact Us</h1>
-            <p className="text-xl opacity-90">Get in touch with our team for any inquiries or support</p>
-          </div>
+    <div className="bg-gray-50 min-h-screen">
+      {/* Contact Hero Banner */}
+      <section className="relative bg-primary text-white overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-black opacity-60 z-10"></div>
+          <img 
+            src="https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?q=80&w=2048" 
+            alt="Contact Sri Pavan Computers in Kakinada" 
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+        <div className="container mx-auto px-4 py-20 md:py-28 relative z-20">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+            Contact Us
+          </h1>
+          <p className="text-xl max-w-2xl opacity-90">
+            Get in touch with our friendly team for all your computer and IT service needs
+          </p>
         </div>
       </section>
 

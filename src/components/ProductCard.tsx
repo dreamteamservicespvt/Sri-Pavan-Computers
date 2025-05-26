@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -25,6 +24,9 @@ const ProductCard: React.FC<{ product: ProductProps }> = ({ product }) => {
   const { toast } = useToast();
   const { addToCart } = useCart();
   const [totalPrice, setTotalPrice] = useState(product.price);
+
+  // Enhanced SEO Alt text
+  const altText = `${product.name} - ${product.brand} - Available at Sri Pavan Computers Kakinada`;
 
   // Update total price when quantity changes
   React.useEffect(() => {
@@ -64,7 +66,7 @@ const ProductCard: React.FC<{ product: ProductProps }> = ({ product }) => {
       <Link to={`/products/${product.id}`} className="block relative overflow-hidden h-48">
         <img 
           src={product.image} 
-          alt={product.name}
+          alt={altText}
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />

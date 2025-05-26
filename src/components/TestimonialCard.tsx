@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star, User } from 'lucide-react';
 
@@ -37,6 +36,9 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   const image = testimonial?.avatarUrl || testimonial?.image || propImage;
   const rating = testimonial?.rating ?? propRating;
 
+  // Enhanced alt text for testimonial
+  const altText = `${name} - ${role} - Customer Testimonial for Sri Pavan Computers`;
+  
   return (
     <div className="bg-white rounded-lg shadow-md p-6 md:p-8 hover-card group h-full">
       <div className="flex mb-4">
@@ -56,7 +58,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
       <div className="flex items-center mt-auto">
         <div className="w-12 h-12 flex-shrink-0 mr-3 rounded-full overflow-hidden bg-gray-200 border-2 border-white shadow-md group-hover:shadow-lg group-hover:scale-110 transition-all">
           {image ? (
-            <img src={image} alt={name} className="w-full h-full object-cover" />
+            <img src={image} alt={altText} className="w-full h-full object-cover" loading="lazy" />
           ) : (
             <div className="w-full h-full flex items-center justify-center bg-primary text-white">
               <User className="h-6 w-6" />

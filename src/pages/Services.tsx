@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ import {
   Smartphone, ArrowRight
 } from 'lucide-react';
 import EnhancedServiceCard from '@/components/EnhancedServiceCard';
+import { useSEO } from '@/contexts/SEOContext';
 
 // Services data with background images
 const services = [
@@ -91,6 +92,18 @@ const services = [
 ];
 
 const Services = () => {
+  const { updateSEO } = useSEO();
+  
+  useEffect(() => {
+    updateSEO({
+      title: 'Computer Repair & IT Services in Kakinada | Sri Pavan Computers',
+      description: 'Professional computer repair, virus removal, data recovery & IT maintenance services in Kakinada. Fast, reliable technical support for businesses & individuals. SEO by Dream Team Services.',
+      keywords: 'computer repair Kakinada, laptop repair, virus removal, data recovery, IT services, system maintenance, hardware upgrade',
+      canonicalUrl: 'https://sripavancomputers.in/services',
+      ogImage: 'https://sripavancomputers.in/images/services-og.jpg'
+    });
+  }, [updateSEO]);
+
   return (
     <div className="bg-gray-50 min-h-screen ">
       {/* Hero section */}

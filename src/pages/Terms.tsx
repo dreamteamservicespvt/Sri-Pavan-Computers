@@ -1,4 +1,3 @@
-
 import React from 'react';
 import SectionHeading from '@/components/SectionHeading';
 
@@ -110,9 +109,9 @@ const Terms = () => {
                 If you have any questions about these Terms and Conditions, please contact us at:
               </p>
               <p className="mt-2 text-gray-700">
-                <strong>Email:</strong> pavancomputers_kkd@yahoo.co.in<br />
-                <strong>Phone:</strong> +91 98480 75759<br />
-                <strong>Address:</strong> No. 21/9/9, Sri Krishna Kanth Plaza, R.R. Road, Near Masjid Center, Kakinada Bazar, Kakinada – 533001
+                <strong>Email:</strong> sales@sripavancomputers.in<br />
+                 +91 98480 75759<br />
+                 No. 21/9/9, Sri Krishna Kanth Plaza, R.R. Road, Near Masjid Center, Kakinada Bazar, Kakinada – 533001
               </p>
             </div>
           </div>

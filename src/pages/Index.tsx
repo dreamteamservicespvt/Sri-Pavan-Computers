@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from 'embla-carousel-autoplay';
 import EnhancedServiceCard from '@/components/EnhancedServiceCard';
+import { useSEO } from '@/contexts/SEOContext';
+import StructuredData from '@/components/SEO/StructuredData';
 
 // Feature Card Component
 const FeatureCard = ({ title, description, imageUrl, icon: Icon }) => {
@@ -335,8 +337,36 @@ const testimonials = [
 ];
 
 const Index = () => {
+  const { updateSEO } = useSEO();
+  
+  useEffect(() => {
+    updateSEO({
+      title: 'Sri Pavan Computers | Premium Computer Sales & Services in Kakinada',
+      description: 'Leading computer sales and IT service provider in Kakinada since 2000. Quality laptops, desktops, accessories and professional tech support. SEO services by Dream Team Services.',
+      keywords: 'computer sales Kakinada, laptop repair, IT services, computer accessories, tech support, hardware maintenance',
+      canonicalUrl: 'https://sripavancomputers.in/',
+      ogImage: 'https://sripavancomputers.in/images/home-og.jpg'
+    });
+  }, [updateSEO]);
+
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Add Structured Data */}
+      <StructuredData 
+        type="LocalBusiness" 
+        data={{
+          description: "Sri Pavan Computers is Kakinada's premier computer sales and service provider, offering quality laptops, desktops, components, and professional IT services since 2000.",
+          slogan: "Your trusted technology partner since 2000",
+          foundingDate: "2000",
+          founders: [
+            {
+              "@type": "Person",
+              "name": "Srikanth Varma"
+            }
+          ]
+        }} 
+      />
+      
       {/* Hero section */}
       <Hero />
       
@@ -345,13 +375,12 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <SectionHeading 
             title="Why Choose Sri Pavan Computers?" 
-            subtitle="Trusted by thousands of customers in Kakinada since 2015"
+            subtitle="Trusted by thousands of customers in Kakinada since 2000"
             center={true}
           />
           
           <div className="mt-12 relative">
-            {/* Connected line for desktop */}
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-primary/20 via-primary to-primary/20 transform -translate-y-1/2 z-0"></div>
+            {/* Removed the connected line for desktop */}
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
               {/* Fast Service */}
@@ -437,8 +466,7 @@ const Index = () => {
           />
           
           <div className="mt-12 relative">
-            {/* Connected line for desktop */}
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-primary/20 via-primary to-primary/20 transform -translate-y-1/2 z-0"></div>
+            {/* Removed the connected line for desktop */}
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
               {featuredProducts.map((product) => (
@@ -493,8 +521,7 @@ const Index = () => {
           />
           
           <div className="mt-12 relative">
-            {/* Connected line for desktop */}
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-primary/20 via-primary to-primary/20 transform -translate-y-1/2 z-0"></div>
+            {/* Removed the connected line for desktop */}
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
               {enhancedServices.map((service, index) => (
@@ -531,8 +558,14 @@ const Index = () => {
           />
           
           <div className="mt-12 relative">
-            {/* Connected line for desktop */}
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-primary/20 via-primary to-primary/20 transform -translate-y-1/2 z-0"></div>
+            {/* Premium connecting lines for desktop */}
+            <div className="hidden md:block absolute top-[40px] left-[calc(16.67%+32px)] right-[calc(16.67%+32px)] h-0.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 z-0">
+              <div className="absolute left-1/3 top-1/2 w-4 h-4 rounded-full bg-white border-2 border-primary transform -translate-x-1/2 -translate-y-1/2 shadow-md"></div>
+              <div className="absolute right-1/3 top-1/2 w-4 h-4 rounded-full bg-white border-2 border-primary transform translate-x-1/2 -translate-y-1/2 shadow-md"></div>
+              
+              {/* Subtle animated glow effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/30 to-transparent animate-pulse"></div>
+            </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
               {serviceProcessSteps.map((step, index) => (
@@ -540,12 +573,18 @@ const Index = () => {
                   key={step.id} 
                   className="flex flex-col items-center transition-all duration-700 hover:transform hover:-translate-y-2"
                 >
-                  {/* Number Circle with gradient border */}
+                  {/* Enhanced number circle with premium styling */}
                   <div className="relative mb-6">
+                    {/* Outer glow effect */}
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-blue-600 blur-sm opacity-50"></div>
-                    <div className="w-16 h-16 flex items-center justify-center bg-white text-primary text-2xl font-bold rounded-full border-4 border-primary relative z-10 shadow-lg">
-                      {step.number}
+                    
+                    {/* Number circle with premium styling */}
+                    <div className="w-20 h-20 flex items-center justify-center bg-white text-primary text-2xl font-bold rounded-full border-4 border-primary relative z-10 shadow-lg">
+                      <span className="bg-gradient-to-br from-primary to-blue-700 bg-clip-text text-transparent">{step.number}</span>
                     </div>
+                    
+                    {/* Inner shadow for depth */}
+                    <div className="absolute inset-4 rounded-full shadow-inner z-20 pointer-events-none"></div>
                   </div>
                   
                   {/* Image */}

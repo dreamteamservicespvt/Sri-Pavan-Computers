@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 interface BrandLogoProps {
@@ -40,14 +39,18 @@ const BrandLogo: React.FC<BrandLogoProps> = ({ name, logoUrl, website }) => {
   // Determine the image source
   const imageSrc = imageError && fallbackUrls[name] ? fallbackUrls[name] : logoUrl;
   
+  // Enhanced SEO-friendly alt text
+  const altText = `${name} - Authorized dealer at Sri Pavan Computers in Kakinada`;
+  
   const content = (
     <div className="bg-white rounded-lg p-4 shadow-sm hover:shadow-md transition-all flex items-center justify-center h-32 group">
       {imageSrc ? (
         <img 
           src={imageSrc}
-          alt={`${name} logo`}
+          alt={altText}
           className="max-h-16 max-w-[80%] object-contain group-hover:scale-110 transition-transform duration-300"
           onError={handleImageError}
+          loading="lazy"
         />
       ) : (
         <div className="text-lg font-bold text-gray-700">{name}</div>
@@ -56,7 +59,7 @@ const BrandLogo: React.FC<BrandLogoProps> = ({ name, logoUrl, website }) => {
   );
 
   return website ? (
-    <a href={website} target="_blank" rel="noopener noreferrer" className="block">
+    <a href={website} target="_blank" rel="noopener noreferrer" className="block" aria-label={`Visit ${name} official website`}>
       {content}
     </a>
   ) : (

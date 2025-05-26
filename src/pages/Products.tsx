@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import ProductCard, { ProductProps } from '@/components/ProductCard';
@@ -6,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Search } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { Link } from 'react-router-dom';
+import { useSEO } from '@/contexts/SEOContext';
 
 // Mock product data with fixed image links
 const productsData: ProductProps[] = [
@@ -138,6 +138,7 @@ const categories = [
 ];
 
 const Products = () => {
+  const { updateSEO } = useSEO();
   const [selectedCategory, setSelectedCategory] = useState("All Products");
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
@@ -146,6 +147,17 @@ const Products = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    updateSEO({
+      title: 'Computer Products & Accessories | Sri Pavan Computers Kakinada',
+      description: 'Shop quality computers, laptops, accessories & components in Kakinada. Authorized dealer for HP, Dell, Lenovo & more with warranty & service support. SEO by Dream Team Services.',
+      keywords: 'buy computer Kakinada, laptop sales, computer accessories, PC components, desktop computers, branded laptops',
+      canonicalUrl: 'https://sripavancomputers.in/products',
+      ogType: 'website',
+      ogImage: 'https://sripavancomputers.in/images/products-og.jpg'
+    });
+  }, [updateSEO]);
   
   // Filter products based on category and search term
   const filteredProducts = productsData.filter(product => {

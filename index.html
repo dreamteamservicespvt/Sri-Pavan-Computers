@@ -2,19 +2,135 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/public/pavan-computers-logo.jpg">
-    <link rel="icon" type="image/jpeg" href="/public/pavan-computers-logo.jpg">
-    <link rel="apple-touch-icon" href="/public/pavan-computers-logo.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sri Pavan Computers</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>Sri Pavan Computers | Computer Sales & Service in Kakinada</title>
+    <meta name="title" content="Sri Pavan Computers | Computer Sales & Service in Kakinada">
+    <meta name="description" content="Trusted computer sales, laptop repairs, IT support, and maintenance services in Kakinada since 2000. Authorized dealer for HP, Dell, Lenovo, and other premium brands.">
+    <meta name="keywords" content="computer sales, laptop repair, IT services, computer accessories, tech support, hardware maintenance, Kakinada, computer shop, computer service center">
+    <meta name="author" content="Sri Pavan Computers">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/jpeg" href="/pavan-computers-logo.jpg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sripavancomputers.in/">
+    <meta property="og:title" content="Sri Pavan Computers | Premium Tech Solutions in Kakinada">
+    <meta property="og:description" content="Your trusted technology partner in Kakinada since 2000. Quality computer sales, expert repairs, and professional IT services.">
+    <meta property="og:image" content="https://sripavancomputers.in/og-image.jpg">
+    <meta property="og:site_name" content="Sri Pavan Computers">
+    <meta property="og:locale" content="en_IN">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sripavancomputers.in/">
+    <meta property="twitter:title" content="Sri Pavan Computers | Premium Tech Solutions in Kakinada">
+    <meta property="twitter:description" content="Your trusted technology partner in Kakinada since 2000. Quality computer sales, expert repairs, and professional IT services.">
+    <meta property="twitter:image" content="https://sripavancomputers.in/twitter-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://sripavancomputers.in/">
+    
+    <!-- Performance Optimizations -->
+    <!-- Preconnect to origin domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://res.cloudinary.com">
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/logo.png" as="image" fetchpriority="high">
+    <link rel="preload" href="/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+    
+    <!-- DNS Prefetch for third-party domains -->
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
-    <!-- Add Satoshi font -->
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,700,500,300,900&display=swap" rel="stylesheet">
+    
+    <!-- Critical CSS -->
+    <style>
+      :root {
+        --primary: #005fbf;
+        --secondary: #e74c3c;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .loading-indicator {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #001a33;
+        z-index: 9999;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Minimal Loading State for Core Web Vitals -->
+      <div class="loading-indicator">
+        <img src="/logo.png" alt="Sri Pavan Computers" width="200" height="80" style="max-width:80%" />
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Add local business schema directly in HTML for faster indexing -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ComputerStore",
+        "name": "Sri Pavan Computers",
+        "image": "https://sripavancomputers.in/logo.png",
+        "@id": "https://sripavancomputers.in/#organization",
+        "url": "https://sripavancomputers.in",
+        "telephone": "+919848075759",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "No. 21/9/9, Sri Krishna Kanth Plaza, R.R. Road, Near Masjid Center",
+          "addressLocality": "Kakinada",
+          "postalCode": "533001",
+          "addressRegion": "Andhra Pradesh",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "16.9452857",
+          "longitude": "82.2156568"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+            "opens": "09:30",
+            "closes": "20:30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Sunday",
+            "opens": "10:00",
+            "closes": "18:00"
+          }
+        ],
+        "priceRange": "₹₹"
+      }
+    </script>
   </body>
 </html>
