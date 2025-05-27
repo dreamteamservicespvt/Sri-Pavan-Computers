@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import SectionHeading from '@/components/SectionHeading';
 import { 
   CheckCircle, 
@@ -11,7 +11,7 @@ import {
   GraduationCap,
   Heart
 } from 'lucide-react';
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
 import { useSEO } from '@/contexts/SEOContext';
@@ -98,31 +98,19 @@ const About = () => {
     }
   ];
 
-  // Animation for sections
+  // Animation for sections - completely replaced with a more reliable version
   const FadeInSection = ({ children, delay = 0 }) => {
-    const controls = useAnimation();
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.2 });
-    
-    useEffect(() => {
-      if (isInView) {
-        controls.start("visible");
-      }
-    }, [controls, isInView]);
-    
+    // Simple implementation that ensures content is always visible
     return (
-      <motion.div
-        ref={ref}
-        animate={controls}
-        initial="hidden"
-        transition={{ duration: 0.5, delay }}
-        variants={{
-          visible: { opacity: 1, y: 0 },
-          hidden: { opacity: 0, y: 50 }
-        }}
-      >
-        {children}
-      </motion.div>
+      <div className="opacity-100 visible">
+        <motion.div
+          initial={{ opacity: 1, y: 0 }} // Start fully visible
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay }}
+        >
+          {children}
+        </motion.div>
+      </div>
     );
   };
 
