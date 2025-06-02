@@ -1,0 +1,31 @@
+/* Team Card Styles */
+@layer components {
+  .team-card {
+    @apply relative bg-white rounded-xl overflow-hidden transition-all duration-300;
+  }
+  
+  .team-card:hover {
+    @apply shadow-xl transform -translate-y-1;
+  }
+  
+  .team-card .team-image {
+    height: 0;
+    padding-bottom: 120%;
+    @apply relative overflow-hidden;
+  }
+  
+  .team-card .team-image img {
+    @apply absolute inset-0 w-full h-full object-cover;
+    object-position: center 15%; /* Focus on face */
+  }
+  
+  /* Elegant hover animation */
+  .team-card:hover .team-social {
+    @apply opacity-100 transform translate-y-0;
+  }
+  
+  .team-card .team-social {
+    @apply absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4
+    opacity-0 transform translate-y-2 transition-all duration-300;
+  }
+}

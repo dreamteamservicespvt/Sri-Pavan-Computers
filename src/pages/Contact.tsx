@@ -28,6 +28,42 @@ const Contact = () => {
     });
   }, [updateSEO]);
   
+  // Add this code to check for product enquiries
+  useEffect(() => {
+    // Check if there's an enquiry stored in sessionStorage
+    const storedEnquiry = sessionStorage.getItem('enquiryProduct');
+    
+    if (storedEnquiry) {
+      try {
+        const { productName } = JSON.parse(storedEnquiry);
+        
+        // Pre-fill the subject with the product name
+        setFormData(prev => ({
+          ...prev,
+          subject: `Enquiry about ${productName}`,
+          message: `I would like to inquire about the ${productName}. Please provide more information about its availability, specifications, and current pricing.\n\nThank you.`
+        }));
+        
+        // Clear the sessionStorage after using it
+        sessionStorage.removeItem('enquiryProduct');
+      } catch (err) {
+        console.error("Error parsing stored enquiry:", err);
+      }
+    }
+    
+    // Check URL parameters for enquiry flag
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get('enquiry') === 'product') {
+      // Scroll to the contact form
+      const formElement = document.getElementById('contact-form');
+      if (formElement) {
+        setTimeout(() => {
+          formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 500);
+      }
+    }
+  }, []);
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -180,7 +216,7 @@ const Contact = () => {
                     subtitle="Fill out the form and we'll get back to you as soon as possible"
                   />
                   
-                  <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+                  <form onSubmit={handleSubmit} className="mt-8 space-y-6" id="contact-form">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>

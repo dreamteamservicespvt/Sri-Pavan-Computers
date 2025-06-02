@@ -150,14 +150,13 @@ const Products = () => {
 
   useEffect(() => {
     updateSEO({
-      title: 'Computer Products & Accessories | Sri Pavan Computers Kakinada',
-      description: 'Shop quality computers, laptops, accessories & components in Kakinada. Authorized dealer for HP, Dell, Lenovo & more with warranty & service support. SEO by Dream Team Services.',
-      keywords: 'buy computer Kakinada, laptop sales, computer accessories, PC components, desktop computers, branded laptops',
+      title: 'Products | Sri Pavan Computers - Computer Sales in Kakinada',
+      description: 'Browse our wide range of computers, laptops, accessories, and more. Authorized dealer for top brands like HP, Dell, Lenovo, and others in Kakinada.',
+      keywords: 'computer store Kakinada, laptop sales, desktop PC, computer accessories, printers',
       canonicalUrl: 'https://sripavancomputers.in/products',
-      ogType: 'website',
       ogImage: 'https://sripavancomputers.in/images/products-og.jpg'
     });
-  }, [updateSEO]);
+  }, []); // Empty dependency array since updateSEO is now memoized
   
   // Filter products based on category and search term
   const filteredProducts = productsData.filter(product => {

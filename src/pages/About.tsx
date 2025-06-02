@@ -15,6 +15,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
 import { useSEO } from '@/contexts/SEOContext';
+import TeamSection from '@/components/TeamSection';
 
 const About = () => {
   const { updateSEO } = useSEO();
@@ -27,7 +28,7 @@ const About = () => {
       canonicalUrl: 'https://sripavancomputers.in/about',
       ogImage: 'https://sripavancomputers.in/images/about-og.jpg'
     });
-  }, [updateSEO]);
+  }, []); // Empty dependency array since updateSEO is now memoized
 
   // Updated company milestones starting from 2000
   const milestones = [
@@ -50,54 +51,6 @@ const About = () => {
     "Community involvement and support"
   ];
   
-  // Team members with enhanced details
-  const teamMembers = [
-    {
-      name: "Srikanth Varma",
-      position: "Founder & CEO",
-      bio: "With over 20 years in the IT industry, Srikanth leads our company with expertise and vision. He founded Sri Pavan Computers in 2000 with a mission to provide quality technology solutions to the region.",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1974",
-      socialLinks: {
-        linkedin: "#",
-        twitter: "#",
-        email: "sales@sripavancomputers.in"
-      }
-    },
-    {
-      name: "Priya Reddy",
-      position: "Technical Director",
-      bio: "Priya oversees all technical operations and ensures top-quality service delivery. With her expertise in hardware and networking, she has been instrumental in our growth since 2005.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1976",
-      socialLinks: {
-        linkedin: "#",
-        twitter: "#",
-        email: "sales@sripavancomputers.in"
-      }
-    },
-    {
-      name: "Rajesh Kumar",
-      position: "Customer Relations Manager",
-      bio: "Rajesh ensures our customers receive exceptional service and support. His people-first approach has helped us maintain a loyal customer base for over a decade.",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1974",
-      socialLinks: {
-        linkedin: "#",
-        twitter: "#",
-        email: "sales@sripavancomputers.in"
-      }
-    },
-    {
-      name: "Ananya Sharma",
-      position: "Sales Manager",
-      bio: "Ananya drives our sales strategies and has consistently exceeded targets year after year. Her deep understanding of technology products helps customers make informed decisions.",
-      image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=1470",
-      socialLinks: {
-        linkedin: "#",
-        twitter: "#",
-        email: "sales@sripavancomputers.in"
-      }
-    }
-  ];
-
   // Animation for sections - completely replaced with a more reliable version
   const FadeInSection = ({ children, delay = 0 }) => {
     // Simple implementation that ensures content is always visible
@@ -116,7 +69,7 @@ const About = () => {
 
   // Stats with counters
   const stats = [
-    { label: "Years of Experience", value: "24+", icon: Clock },
+    { label: "Years of Experience", value: "25+", icon: Clock },
     { label: "Satisfied Customers", value: "10,000+", icon: Users },
     { label: "Products & Services", value: "500+", icon: Award },
     { label: "Certified Technicians", value: "15+", icon: ShieldCheck }
@@ -277,7 +230,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Enhanced Milestones timeline */}
+      {/* Enhanced Milestones timeline - mobile optimized */}
       <section className="py-16 md:py-24 bg-gray-50 overflow-hidden">
         <div className="container mx-auto px-4">
           <SectionHeading 
@@ -287,13 +240,17 @@ const About = () => {
           />
           
           <div className="max-w-5xl mx-auto mt-16 relative">
-            {/* Decorative elements */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 transform -translate-x-1/2"></div>
+            {/* Desktop timeline decorative line - hidden on mobile */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 transform -translate-x-1/2 hidden md:block"></div>
             
-            <div className="space-y-24">
+            {/* Mobile timeline decorative line */}
+            <div className="absolute left-6 top-10 bottom-10 w-1 bg-primary/20 md:hidden"></div>
+            
+            <div className="space-y-12 md:space-y-24">
               {milestones.map((milestone, index) => (
                 <FadeInSection delay={index * 0.1} key={index}>
-                  <div className={`flex items-center relative ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  {/* Desktop view */}
+                  <div className={`hidden md:flex items-center relative ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
                     {/* Year bubble */}
                     <div className="absolute left-1/2 transform -translate-x-1/2 z-10">
                       <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-blue-600 shadow-lg flex items-center justify-center text-white font-bold">
@@ -302,12 +259,11 @@ const About = () => {
                     </div>
                     
                     {/* Content */}
-                    <div className={`w-full md:w-[calc(50%-3rem)] ${index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
+                    <div className={`w-[calc(50%-3rem)] ${index % 2 === 0 ? 'text-right pr-12' : 'text-left pl-12'}`}>
                       <div className="bg-white p-6 rounded-xl shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300">
                         <div className="text-3xl mb-3">{milestone.icon}</div>
                         <h3 className="text-xl font-bold text-primary mb-2">{milestone.event}</h3>
                         <p className="text-gray-600">
-                          {/* Adding some more context to milestones */}
                           {index === 0 && "Started with a small shop selling computer peripherals and offering repair services."}
                           {index === 1 && "Started offering products from major brands and expanded service offerings."}
                           {index === 2 && "Expanded our reach to serve customers in neighboring cities."}
@@ -321,7 +277,39 @@ const About = () => {
                     </div>
                     
                     {/* Empty space for the other side */}
-                    <div className="hidden md:block w-[calc(50%-3rem)]"></div>
+                    <div className="w-[calc(50%-3rem)]"></div>
+                  </div>
+                  
+                  {/* Mobile view - completely redesigned to match screenshot */}
+                  <div className="md:hidden flex gap-4 relative">
+                    {/* Year bubble - styled to match screenshot */}
+                    <div className="z-10 flex-shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-base shadow-md">
+                        {milestone.year}
+                      </div>
+                    </div>
+                    
+                    {/* Mobile-optimized content card - matches screenshot design */}
+                    <div className="flex-1 bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                      <div className="p-5">
+                        <div className="flex items-start gap-3 mb-2">
+                          <div className="text-2xl">{milestone.icon}</div>
+                          <h3 className="text-lg font-bold text-blue-900 leading-tight">
+                            {milestone.event}
+                          </h3>
+                        </div>
+                        <p className="text-gray-600 text-sm pl-8">
+                          {index === 0 && "Started with a small shop selling computer peripherals and offering repair services."}
+                          {index === 1 && "Started offering products from major brands and expanded service offerings."}
+                          {index === 2 && "Expanded our reach to serve customers in neighboring cities."}
+                          {index === 3 && "Began providing comprehensive IT solutions for businesses of all sizes."}
+                          {index === 4 && "Became an authorized dealer for premium brands to ensure quality and warranty."}
+                          {index === 5 && "Adapted to changing market needs with custom solutions and e-commerce."}
+                          {index === 6 && "Invested in a larger space to showcase more products and improve customer experience."}
+                          {index === 7 && "A major milestone reflecting our growing customer trust and loyalty."}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </FadeInSection>
               ))}
@@ -330,59 +318,8 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team section */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4">
-          <SectionHeading 
-            title="Meet Our Leadership Team" 
-            subtitle="The experts behind our success"
-            center={true}
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-            {teamMembers.map((member, index) => (
-              <FadeInSection delay={index * 0.1} key={index}>
-                <div className="bg-gray-50 rounded-xl overflow-hidden shadow-md group hover:shadow-xl transition-all duration-300 border border-gray-100">
-                  <div className="relative overflow-hidden h-72">
-                    <img 
-                      src={member.image} 
-                      alt={member.name} 
-                      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
-                    />
-                    {/* Overlay with social links */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                      <div className="flex space-x-4">
-                        <a href={member.socialLinks.linkedin} className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center text-white transition-colors">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                          </svg>
-                        </a>
-                        <a href={member.socialLinks.twitter} className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center text-white transition-colors">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-                          </svg>
-                        </a>
-                        <a href={`mailto:${member.socialLinks.email}`} className="w-8 h-8 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center text-white transition-colors">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/>
-                          </svg>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-1 text-gray-900">{member.name}</h3>
-                    <p className="text-primary font-medium mb-3">{member.position}</p>
-                    <p className="text-gray-700 text-sm line-clamp-4">
-                      {member.bio}
-                    </p>
-                  </div>
-                </div>
-              </FadeInSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Team section - now using dynamic TeamSection component */}
+      <TeamSection />
 
       {/* Call to action */}
       <section className="py-16 md:py-24 bg-gradient-to-r from-primary to-blue-600 text-white">

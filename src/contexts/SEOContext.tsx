@@ -1,80 +1,59 @@
-import React, { createContext, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 
-// SEO metadata interface
-interface SEOProps {
-  title?: string;
-  description?: string;
+// Define SEO data structure
+interface SEOData {
+  title: string;
+  description: string;
   keywords?: string;
   canonicalUrl?: string;
   ogImage?: string;
-  ogType?: 'website' | 'article' | 'product' | 'profile';
-  twitterCard?: 'summary' | 'summary_large_image' | 'app' | 'player';
-  noIndex?: boolean;
 }
 
-// Default SEO values
-const defaultSEO: SEOProps = {
-  title: 'Sri Pavan Computers | Computer Sales & Service in Kakinada',
-  description: 'Trusted computer sales, laptop repairs, IT support, and maintenance services in Kakinada since 2000. Authorized dealer for HP, Dell, Lenovo, and other premium brands.',
-  keywords: 'computer sales, laptop repair, IT services, computer accessories, tech support, hardware maintenance, Kakinada',
-  canonicalUrl: 'https://sri-pavan-computers.vercel.app',
-  ogImage: 'https://sri-pavan-computers.vercel.app/pavan-computers-logo.jpg', // Updated path to use your logo
-  ogType: 'website',
-  twitterCard: 'summary_large_image',
-  noIndex: false,
+// Define context type
+interface SEOContextType {
+  updateSEO: (data: SEOData) => void;
+}
+
+// Create context
+const SEOContext = createContext<SEOContextType | undefined>(undefined);
+
+// Custom hook to use SEO context
+export const useSEO = () => {
+  const context = useContext(SEOContext);
+  if (context === undefined) {
+    throw new Error('useSEO must be used within a SEOProvider');
+  }
+  return context;
 };
 
-// Context setup
-const SEOContext = createContext<{
-  updateSEO: (seo: SEOProps) => void;
-  seo: SEOProps;
-}>({
-  updateSEO: () => {},
-  seo: defaultSEO,
-});
+// SEO Provider component
+export const SEOProvider = ({ children }: { children: React.ReactNode }) => {
+  const [seoData, setSeoData] = useState<SEOData>({
+    title: 'Sri Pavan Computers | Computer Sales and Service in Kakinada',
+    description: 'Sri Pavan Computers offers computer sales, repairs, and IT services in Kakinada. Authorized dealer for HP, Dell, Lenovo, and more. Quality tech solutions since 2000.',
+    keywords: 'computer shop Kakinada, laptop repair, desktop sales, IT services, computer accessories',
+    canonicalUrl: 'https://sripavancomputers.in',
+    ogImage: 'https://sripavancomputers.in/images/og-image.jpg'
+  });
 
-export const useSEO = () => useContext(SEOContext);
-
-interface SEOProviderProps {
-  children: ReactNode;
-}
-
-export const SEOProvider: React.FC<SEOProviderProps> = ({ children }) => {
-  const [seo, setSEO] = React.useState<SEOProps>(defaultSEO);
-
-  const updateSEO = (newSEO: SEOProps) => {
-    setSEO({ ...seo, ...newSEO });
-  };
+  // Memoize the updateSEO function to prevent it from changing on each render
+  const updateSEO = useCallback((data: SEOData) => {
+    setSeoData(data);
+  }, []);
 
   return (
-    <SEOContext.Provider value={{ updateSEO, seo }}>
+    <SEOContext.Provider value={{ updateSEO }}>
       <Helmet>
-        {/* Basic Meta Tags */}
-        <title>{seo.title}</title>
-        <meta name="description" content={seo.description} />
-        <meta name="keywords" content={seo.keywords} />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-        
-        {/* OpenGraph Tags */}
-        <meta property="og:title" content={seo.title} />
-        <meta property="og:description" content={seo.description} />
-        <meta property="og:type" content={seo.ogType} />
-        {seo.canonicalUrl && <meta property="og:url" content={seo.canonicalUrl} />}
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="Sri Pavan Computers" />
-        <meta property="og:locale" content="en_IN" />
-        
-        {/* Twitter Tags */}
-        <meta name="twitter:card" content={seo.twitterCard} />
-        <meta name="twitter:title" content={seo.title} />
-        <meta name="twitter:description" content={seo.description} />
-        {seo.ogImage && <meta name="twitter:image" content={seo.ogImage} />}
-        
-        {/* Robot Meta Tags */}
-        {seo.noIndex && <meta name="robots" content="noindex, nofollow" />}
+        <title>{seoData.title}</title>
+        <meta name="description" content={seoData.description} />
+        {seoData.keywords && <meta name="keywords" content={seoData.keywords} />}
+        {seoData.canonicalUrl && <link rel="canonical" href={seoData.canonicalUrl} />}
+        <meta property="og:title" content={seoData.title} />
+        <meta property="og:description" content={seoData.description} />
+        {seoData.ogImage && <meta property="og:image" content={seoData.ogImage} />}
+        <meta property="og:type" content="website" />
+        {seoData.canonicalUrl && <meta property="og:url" content={seoData.canonicalUrl} />}
       </Helmet>
       {children}
     </SEOContext.Provider>
