@@ -216,6 +216,15 @@ const AppContent = () => {
               <Footer />
             </>
           } />
+          <Route path="/privacypolicy" element={
+            <>
+              <Navbar />
+              <main className="pt-16">
+                <PrivacyPolicy />
+              </main>
+              <Footer />
+            </>
+          } />
           <Route path="/terms" element={
             <>
               <Navbar />
@@ -416,6 +425,15 @@ function App() {
                   </>
                 } />
                 <Route path="/privacy-policy" element={
+                  <>
+                    <Navbar />
+                    <main className="pt-16">
+                      <PrivacyPolicy />
+                    </main>
+                    <Footer />
+                  </>
+                } />
+                <Route path="/privacypolicy" element={
                   <>
                     <Navbar />
                     <main className="pt-16">
