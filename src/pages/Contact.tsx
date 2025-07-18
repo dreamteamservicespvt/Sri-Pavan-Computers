@@ -20,11 +20,11 @@ const Contact = () => {
   
   useEffect(() => {
     updateSEO({
-      title: 'Contact Sri Pavan Computers | Computer Sales & Service in Kakinada',
-      description: 'Reach out to Sri Pavan Computers in Kakinada for all your computer sales, repair & IT service needs. Visit our store or contact us online for quick assistance. SEO by Dream Team Services.',
-      keywords: 'contact computer shop Kakinada, IT service contact, computer repair phone, laptop service appointment, tech support contact',
-      canonicalUrl: 'https://sripavancomputers.in/contact',
-      ogImage: 'https://sripavancomputers.in/images/contact-og.jpg'
+      title: 'Contact Sri Pavan Computers | Visit Our Store in Kakinada',
+      description: 'Get in touch with Sri Pavan Computers. Find our Kakinada store address, phone number, email, and business hours. We\'re ready to assist you with all your tech needs.',
+      keywords: 'contact sri pavan computers, kakinada computer shop address, phone number, business hours, visit store, tech support contact, computer repair appointment',
+      canonicalUrl: 'https://sripavancomputers.com/contact',
+      ogImage: 'https://sripavancomputers.com/images/contact-og.jpg'
     });
   }, [updateSEO]);
   
@@ -107,10 +107,10 @@ const Contact = () => {
         </div>
         <div className="container mx-auto px-4 py-20 md:py-28 relative z-20">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight">
-            Contact Us
+            Get in Touch or Visit Us Today
           </h1>
           <p className="text-xl max-w-2xl opacity-90">
-            Get in touch with our friendly team for all your computer and IT service needs
+            Contact Sri Pavan Computers for all your technology needs. We're here to help with expert advice and professional service.
           </p>
         </div>
       </section>

@@ -341,11 +341,11 @@ const Index = () => {
   
   useEffect(() => {
     updateSEO({
-      title: 'Sri Pavan Computers | Premium Computer Sales & Services in Kakinada',
-      description: 'Leading computer sales and IT service provider in Kakinada since 2000. Quality laptops, desktops, accessories and professional tech support. SEO services by Dream Team Services.',
-      keywords: 'computer sales Kakinada, laptop repair, IT services, computer accessories, tech support, hardware maintenance',
-      canonicalUrl: 'https://sripavancomputers.in/',
-      ogImage: 'https://sripavancomputers.in/images/home-og.jpg'
+      title: 'Kakinada\'s Trusted Experts for Computer Repair, Sales & Custom PC Builds Since 2005',
+      description: 'Sri Pavan Computers, established in 2005, is Kakinada\'s premier destination for computer repair, laptop sales, custom PC builds & data recovery. Serving Kakinada & Vijayawada with expert technicians, genuine parts & fast service. Visit us or call today!',
+      keywords: 'computer repair kakinada, laptop service center near me, sri pavan computers, custom pc build vijayawada, gaming pc store vijayawada, data recovery services kakinada, best computer shop kakinada, dell laptop repair vijayawada, business laptops kakinada, computer networking solutions, hp laptop repair, lenovo service center, apple macbook repair, virus removal kakinada',
+      canonicalUrl: 'https://sripavancomputers.com/',
+      ogImage: 'https://sripavancomputers.com/images/home-og.jpg'
     });
   }, [updateSEO]);
 

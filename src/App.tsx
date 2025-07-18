@@ -23,6 +23,20 @@ import SignUp from '@/pages/SignUp'
 import ForgotPassword from '@/pages/ForgotPassword'
 import Profile from '@/pages/Profile'
 import Unauthorized from '@/pages/Unauthorized'
+
+// Service Pages
+import ComputerRepair from '@/pages/services/ComputerRepair'
+import DataRecovery from '@/pages/services/DataRecovery'
+import CustomPCBuilding from '@/pages/services/CustomPCBuilding'
+import NetworkingSolutions from '@/pages/services/NetworkingSolutions'
+
+// Blog Pages
+import LaptopRepairSignsBlog from '@/pages/blog/LaptopRepairSignsBlog'
+import GamersGuideVijayawada from '@/pages/blog/GamersGuideVijayawada'
+
+// FAQ Page
+import FAQsPage from '@/pages/FAQsPage'
+
 import { CartProvider } from './hooks/use-cart'
 import { AuthProvider } from './hooks/use-auth'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -131,6 +145,76 @@ const AppContent = () => {
               <Navbar />
               <main className="pt-16">
                 <Services />
+              </main>
+              <Footer />
+            </>
+          } />
+          
+          {/* Service Detail Pages */}
+          <Route path="/services/computer-repair" element={
+            <>
+              <Navbar />
+              <main className="pt-16">
+                <ComputerRepair />
+              </main>
+              <Footer />
+            </>
+          } />
+          <Route path="/services/data-recovery" element={
+            <>
+              <Navbar />
+              <main className="pt-16">
+                <DataRecovery />
+              </main>
+              <Footer />
+            </>
+          } />
+          <Route path="/services/custom-pc-building" element={
+            <>
+              <Navbar />
+              <main className="pt-16">
+                <CustomPCBuilding />
+              </main>
+              <Footer />
+            </>
+          } />
+          <Route path="/services/networking-solutions" element={
+            <>
+              <Navbar />
+              <main className="pt-16">
+                <NetworkingSolutions />
+              </main>
+              <Footer />
+            </>
+          } />
+          
+          {/* Blog Pages */}
+          <Route path="/blog/laptop-repair-signs-kakinada" element={
+            <>
+              <Navbar />
+              <main className="pt-16">
+                <LaptopRepairSignsBlog />
+              </main>
+              <Footer />
+            </>
+          } />
+          
+          <Route path="/blog/gamers-guide-vijayawada" element={
+            <>
+              <Navbar />
+              <main className="pt-16">
+                <GamersGuideVijayawada />
+              </main>
+              <Footer />
+            </>
+          } />
+          
+          {/* Updated FAQ Page */}
+          <Route path="/faq" element={
+            <>
+              <Navbar />
+              <main className="pt-16">
+                <FAQsPage />
               </main>
               <Footer />
             </>

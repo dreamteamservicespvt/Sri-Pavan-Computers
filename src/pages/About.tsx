@@ -22,33 +22,36 @@ const About = () => {
   
   useEffect(() => {
     updateSEO({
-      title: 'About Sri Pavan Computers | Computer Sales & Service History in Kakinada',
-      description: 'Discover our journey since 2000 as Kakinada\'s premier computer sales and service center. Learn about our team, values, and mission to provide top-quality IT solutions. SEO by Dream Team Services.',
-      keywords: 'computer shop Kakinada, IT services history, computer repair team, tech support specialists, computer store mission',
-      canonicalUrl: 'https://sripavancomputers.in/about',
-      ogImage: 'https://sripavancomputers.in/images/about-og.jpg'
+      title: 'The Story of Sri Pavan Computers | Kakinada\'s Tech Partner Since 2005',
+      description: 'Learn about Sri Pavan Computers, Kakinada\'s trusted source for computer solutions for nearly 20 years. Discover our commitment to quality, expertise, and customer satisfaction.',
+      keywords: 'sri pavan computers history, kakinada computer shop, it services team, expert technicians, computer store experience, trusted technology partner',
+      canonicalUrl: 'https://sripavancomputers.com/about',
+      ogImage: 'https://sripavancomputers.com/images/about-og.jpg'
     });
-  }, []); // Empty dependency array since updateSEO is now memoized
+  }, [updateSEO]);
 
-  // Updated company milestones starting from 2000
+  // Updated company milestones starting from 2005 (corrected establishment year)
   const milestones = [
-    { year: 2000, event: "Sri Pavan Computers established in Kakinada", icon: "🏪" },
-    { year: 2005, event: "Expanded product range with major technology partnerships", icon: "🤝" },
-    { year: 2010, event: "Opened second branch in Rajahmundry", icon: "🏢" },
-    { year: 2015, event: "Launched corporate IT solutions division", icon: "💼" },
-    { year: 2018, event: "Began partnerships with HP, Dell and Lenovo as authorized dealer", icon: "🖥️" },
-    { year: 2020, event: "Launched custom PC building service and online store", icon: "🛒" },
-    { year: 2022, event: "Opened expanded flagship showroom in Kakinada", icon: "🎉" },
-    { year: 2023, event: "Celebrated serving over 10,000 customers", icon: "🏆" }
+    { year: 2005, event: "Sri Pavan Computers established in Kakinada with a vision to bring professional, reliable computer services to the community", icon: "🏪" },
+    { year: 2008, event: "Expanded service offerings with advanced data recovery and networking solutions", icon: "🔧" },
+    { year: 2012, event: "Became authorized dealer for HP, Dell, and Lenovo with growing customer base", icon: "🤝" },
+    { year: 2015, event: "Launched custom PC building service, becoming the go-to expert for gaming and professional rigs", icon: "�" },
+    { year: 2018, event: "Opened expanded showroom in Sri Krishna Kanth Plaza, R.R. Road", icon: "🏢" },
+    { year: 2020, event: "Adapted to digital transformation with enhanced online presence and remote support", icon: "🌐" },
+    { year: 2022, event: "Celebrating nearly two decades of trusted service to Kakinada and surrounding areas", icon: "🎉" },
+    { year: 2024, event: "Expanding reach to Vijayawada market with specialized custom PC building services", icon: "🏆" }
   ];
 
-  // Company values - unchanged
+  // Company values - updated to match business fact sheet
   const values = [
-    "Customer satisfaction is our top priority",
-    "Honesty and transparency in all dealings",
-    "Quality products and services at competitive prices",
-    "Technical expertise and continuous learning",
-    "Community involvement and support"
+    "Nearly 20 years of trusted service in the Kakinada region",
+    "Team of certified and experienced expert technicians",
+    "Commitment to genuine products from authorized distributors with warranty",
+    "Fast, reliable service with quick turnaround times",
+    "Specialist in high-performance custom PC builds",
+    "Comprehensive IT solutions for individuals, students, and businesses",
+    "Honest pricing and transparent service policies",
+    "Continuous learning and staying updated with latest technology"
   ];
   
   // Animation for sections - completely replaced with a more reliable version
@@ -67,12 +70,12 @@ const About = () => {
     );
   };
 
-  // Stats with counters
+  // Stats with counters (updated to reflect 2005 establishment)
   const stats = [
-    { label: "Years of Experience", value: "25+", icon: Clock },
-    { label: "Satisfied Customers", value: "10,000+", icon: Users },
-    { label: "Products & Services", value: "500+", icon: Award },
-    { label: "Certified Technicians", value: "15+", icon: ShieldCheck }
+    { label: "Years of Experience", value: "19+", icon: Clock },
+    { label: "Satisfied Customers", value: "8,000+", icon: Users },
+    { label: "Products & Services", value: "200+", icon: Award },
+    { label: "Expert Technicians", value: "8+", icon: ShieldCheck }
   ];
 
   return (
@@ -98,7 +101,7 @@ const About = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              About Sri Pavan Computers
+              Our Story: Two Decades of Technology and Trust in Kakinada
             </motion.h1>
             <motion.p 
               className="text-xl md:text-2xl text-white/90 leading-relaxed"
@@ -106,7 +109,7 @@ const About = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Your trusted technology partner in Kakinada since 2000
+              Sri Pavan Computers - Your trusted technology partner since 2005
             </motion.p>
             
             {/* Quick stats overview */}
@@ -148,17 +151,17 @@ const About = () => {
             
             <FadeInSection delay={0.2}>
               <SectionHeading 
-                title="Our Story" 
-                subtitle="A journey of innovation, service, and growth since 2000"
+                title="Our History" 
+                subtitle="A journey that began in 2005 with a vision to bring professional, reliable computer services to Kakinada"
               />
               <p className="mb-4 text-gray-700 leading-relaxed">
-                Sri Pavan Computers was established in 2000 with a vision to provide high-quality computer products and services to the people of Kakinada and surrounding areas. What started as a modest technology store has evolved into one of the region's most trusted comprehensive technology solutions providers.
+                Sri Pavan Computers was established in 2005 with a clear mission: to provide professional, reliable computer services to the people of Kakinada and surrounding areas. What started with a commitment to quality and customer service has grown into nearly 20 years of trusted expertise in the technology sector.
               </p>
               <p className="mb-4 text-gray-700 leading-relaxed">
-                Our journey began when founder Srikanth Varma identified the need for reliable technology solutions in the growing digital landscape. With his technical expertise and entrepreneurial spirit, he established Sri Pavan Computers to bridge this critical gap.
+                Located at No. 21/9/9, Sri Krishna Kanth Plaza, R.R. Road, Near Masjid Center, Kakinada Bazar, we have built our reputation on genuine products from authorized distributors, expert technicians, and fast, reliable service that our customers can depend on.
               </p>
               <p className="text-gray-700 leading-relaxed">
-                Over two decades, we have grown steadily by maintaining our core values of customer satisfaction, quality products, and excellent after-sales support. Today, we proudly serve both individual consumers and businesses with a wide range of IT products and specialized services.
+                Today, we are proud to be Kakinada's leading computer sales and service center, specializing in comprehensive IT solutions for individuals, students, professionals, and businesses. Our team of certified technicians continues to deliver the same commitment to excellence that has defined us since day one.
               </p>
               
               <div className="mt-6">
@@ -188,7 +191,7 @@ const About = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-4 text-gray-900">Our Mission</h3>
                 <p className="text-gray-700 flex-grow">
-                  To provide high-quality technology solutions that empower individuals and businesses to achieve their goals, backed by exceptional customer service and technical expertise that exceeds expectations.
+                  To provide genuine products, expert service, and build long-term relationships with our customers in Kakinada and beyond. We are committed to delivering reliable, fast, and professional technology solutions that meet the evolving needs of individuals, students, professionals, and businesses.
                 </p>
               </div>
             </FadeInSection>
@@ -198,9 +201,9 @@ const About = () => {
                 <div className="rounded-full bg-blue-600/10 w-14 h-14 flex items-center justify-center mb-6">
                   <GraduationCap className="h-7 w-7 text-blue-600" />
                 </div>
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">Our Vision</h3>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">Why Choose Us?</h3>
                 <p className="text-gray-700 flex-grow">
-                  To be the most trusted technology partner in Eastern India, leading innovation in IT retail and services while contributing positively to our community's digital advancement and literacy.
+                  With nearly 20 years of experience serving Kakinada, we offer expert technicians, quality products from authorized distributors with warranty, fast service with quick turnaround times, and specialized expertise in high-performance custom PC builds. Our commitment to genuine parts and customer satisfaction sets us apart.
                 </p>
               </div>
             </FadeInSection>
@@ -235,7 +238,7 @@ const About = () => {
         <div className="container mx-auto px-4">
           <SectionHeading 
             title="Our Journey" 
-            subtitle="Key milestones since 2000"
+            subtitle="Key milestones since 2005"
             center={true}
           />
           

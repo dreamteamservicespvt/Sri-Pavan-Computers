@@ -30,11 +30,11 @@ export const useSEO = () => {
 // SEO Provider component
 export const SEOProvider = ({ children }: { children: React.ReactNode }) => {
   const [seoData, setSeoData] = useState<SEOData>({
-    title: 'Sri Pavan Computers | Computer Sales and Service in Kakinada',
-    description: 'Sri Pavan Computers offers computer sales, repairs, and IT services in Kakinada. Authorized dealer for HP, Dell, Lenovo, and more. Quality tech solutions since 2000.',
-    keywords: 'computer shop Kakinada, laptop repair, desktop sales, IT services, computer accessories',
-    canonicalUrl: 'https://sripavancomputers.in',
-    ogImage: 'https://sripavancomputers.in/images/og-image.jpg'
+    title: 'Expert Computer Repair & Laptop Sales in Kakinada | Sri Pavan Computers',
+    description: 'Kakinada\'s trusted computer expert since 2005. Expert laptop repair, custom PC builds, data recovery & sales. Serving Kakinada & Vijayawada. Visit us or call today!',
+    keywords: 'computer repair kakinada, laptop service center near me, sri pavan computers, custom pc build vijayawada, gaming pc store vijayawada, data recovery services kakinada, best computer shop kakinada, dell laptop repair vijayawada, business laptops kakinada, computer networking solutions',
+    canonicalUrl: 'https://sripavancomputers.com',
+    ogImage: 'https://sripavancomputers.com/images/og-image.jpg'
   });
 
   // Memoize the updateSEO function to prevent it from changing on each render

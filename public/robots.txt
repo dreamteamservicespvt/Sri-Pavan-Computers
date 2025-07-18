@@ -1,3 +1,15 @@
+User-agent: *
+Allow: /
+
+# Block admin areas
+Disallow: /admin/
+Disallow: /login
+Disallow: /signup
+
+# Block API endpoints
+Disallow: /api/
+
+# Allow all search engines
 User-agent: Googlebot
 Allow: /
 
@@ -8,6 +20,13 @@ User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
+Allow: /
+
+# Sitemap location
+Sitemap: https://sripavancomputers.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
 Allow: /
 
 User-agent: *
